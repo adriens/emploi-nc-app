@@ -1,6 +1,7 @@
 import 'package:EmploiNC/Emploi.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'EmploiService.dart';
 
@@ -51,6 +52,7 @@ class _Dashboard extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
         appBar: AppBar(
           title: Text(_title),
         ),
@@ -60,15 +62,75 @@ class _Dashboard extends State<Dashboard> {
             if (!snapshot.hasData || snapshot.connectionState == ConnectionState.waiting)
               return Center(child: CircularProgressIndicator());
 
-
-              return ListView.separated(
+              return ListView.builder(
                   itemCount: snapshot.data.length,
-                  separatorBuilder: (BuildContext context, int index) { return Divider(); },
                   itemBuilder:(BuildContext context, int index) {
-                    return ListTile(
-                        title: Text(snapshot.data[index].titreOffre)
-                    );
-                  }
+                    return Card(
+                      elevation: 3,
+                        child: InkWell(
+                          onTap: () => launch(snapshot.data[index].url),
+                          child: Row(
+                            children: <Widget>[
+                            Container(
+                              height: 100.0,
+                              width: 80.0,
+                              padding: EdgeInsets.fromLTRB(10, 2, 0, 0),
+                                child: new Image.memory(snapshot.data[index].decodeLogo(),fit: BoxFit.contain  ),
+                            ),
+                            Container(
+                              height: 100,
+                              child: Padding(
+                                padding: EdgeInsets.fromLTRB(10, 2, 0, 0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 5, 0, 2),
+                                    child: Container(
+                                      width: 260,
+                                      child: Text(snapshot.data[index].titreOffre,style:
+                                        TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                          color: Color.fromARGB(255, 48, 48, 54)
+                                        ), overflow: TextOverflow.ellipsis
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                      ),
+                                      child: Text(snapshot.data[index].typeContrat,textAlign: TextAlign.center,),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
+                                    child: Container(
+                                      child: Row(
+                                        children: <Widget>[
+                                          Padding(
+                                            padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
+                                              child: Text(snapshot.data[index].communeEmploi),
+                                            ),
+                                          Padding(
+                                            padding: EdgeInsets.fromLTRB(100, 3, 0, 3),
+                                            child: Text(snapshot.data[index].aPourvoirLe),
+                                          ),
+                                      ]
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                        )
+                    )
+                  );
+                }
               );
           }
         ),

@@ -16,7 +16,7 @@ class EmploiService {
       print("Status : "+response.statusCode.toString() );
       print("URL <"+response.request.toString()+">");
       print("Reponse 1<"+response.body+">");
-      Iterable i = json.decode(response.body);
+      Iterable i = json.decode(utf8.decode(response.bodyBytes));
 
       List<Emploi> latestEmplois = i.map((data) => Emploi.fromJson(data)).toList();
     print("latestEmplois<"+latestEmplois[0].titreOffre+">");
