@@ -10,6 +10,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primaryColor: Colors.blue[900],
+      ),
+      darkTheme: ThemeData(
+        primaryColor: Colors.blue[900],
+        brightness: Brightness.dark,
+      ),
       home:  Dashboard(),
     );
   }
@@ -92,7 +101,6 @@ class _Dashboard extends State<Dashboard> {
                                         TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 15,
-                                          color: Color.fromARGB(255, 48, 48, 54)
                                         ), overflow: TextOverflow.ellipsis
                                       ),
                                     ),
