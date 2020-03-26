@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'EmploiService.dart';
+import 'SplashScreen.dart';
 
 class MyApp extends StatelessWidget {
 
@@ -19,7 +20,10 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.blue[900],
         brightness: Brightness.dark,
       ),
-      home:  Dashboard(),
+      home: new SplashScreen(),
+      routes: <String, WidgetBuilder>{
+        '/HomeScreen': (BuildContext context) => new Dashboard()
+      },
     );
   }
 }
