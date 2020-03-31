@@ -2,6 +2,8 @@ import 'package:EmploiNC/Widget_ListOffers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'Widget_GridView.dart';
+
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -48,8 +50,8 @@ class HomePage extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
+              GridViewWidget(),
               ListOffers(),
-              Icon(Icons.directions_transit),
             ],
           ),
         ),
