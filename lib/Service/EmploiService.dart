@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import 'Emploi.dart';
-import 'app_config.dart';
+import '../Model/Emploi.dart';
+import '../app_config.dart';
 
 const Map<String, String> HEADERS = {
   'x-rapidapi-key': apiKey,
@@ -21,7 +21,9 @@ class EmploiService {
       Iterable i = json.decode(utf8.decode(response.bodyBytes));
 
       List<Emploi> latestEmplois = i.map((data) => Emploi.fromJson(data)).toList();
-    print("latestEmplois<"+latestEmplois[0].titreOffre+">");
+      print("latestEmplois<"+latestEmplois[0].titreOffre+">");
       return latestEmplois;
   }
+
+
 }

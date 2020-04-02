@@ -1,4 +1,4 @@
-import 'package:EmploiNC/Widget_ListOffers.dart';
+import 'file:///C:/Users/JAVAE/Documents/emploi-nc-app/lib/Widget/Widget_ListOffers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

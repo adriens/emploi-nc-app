@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'Emploi.dart';
-import 'EmploiService.dart';
+import '../Model/Emploi.dart';
+import '../Service/EmploiService.dart';
 
 class GridViewWidget extends StatefulWidget {
   @override
@@ -73,6 +73,7 @@ class _GridViewWidget extends State<GridViewWidget> {
       {'Colors': Color.fromRGBO(255, 255, 255, 0.9)},
       {'Colors':Color.fromRGBO(255, 255, 255, 0.9)},
       ];
+
     return GridView.builder(
         itemCount: snapshot.data.length,
         gridDelegate:

@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'Emploi.dart';
-import 'EmploiService.dart';
+import '../Model/Emploi.dart';
+import '../Service/EmploiService.dart';
 
 class ListOffers extends StatefulWidget {
 

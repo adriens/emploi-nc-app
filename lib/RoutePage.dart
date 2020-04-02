@@ -1,14 +1,11 @@
-import 'package:EmploiNC/HomePage.dart';
-import 'package:EmploiNC/Widget_ListOffers.dart';
+import 'file:///C:/Users/JAVAE/Documents/emploi-nc-app/lib/Page/HomePage.dart';
+import 'Widget/Widget_PlaceHolder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'AboutPage.dart';
-import 'SearchPage.dart';
-import 'StatsPage.dart';
-import 'Widget_About.dart';
-import 'Widget_PlaceHolder.dart';
-import 'Widget_Search.dart';
-import 'Widget_Stats.dart';
+import 'Page/AboutPage.dart';
+import 'Page/SearchPage.dart';
+import 'Page/StatsPage.dart';
+
 
 class RoutePage extends StatefulWidget {
   @override
