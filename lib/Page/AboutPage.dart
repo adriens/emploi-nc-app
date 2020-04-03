@@ -1,4 +1,7 @@
-import 'file:///C:/Users/JAVAE/Documents/emploi-nc-app/lib/Widget/Widget_ListOffers.dart';
+import 'file:///C:/Users/JAVAE/Documents/emploi-nc-app/lib/Widget/ListOffers.dart';
+import 'package:EmploiNC/Widget/About.dart';
+import 'package:EmploiNC/Widget/Social.dart';
+import 'package:EmploiNC/Widget/Collaborateurs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +10,14 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+      brightness: Brightness.dark,
+      primaryColor: Colors.blue[900],
+    ),
+      darkTheme: ThemeData(
+        primaryColor: Colors.blue[900],
+        brightness: Brightness.dark,
+      ),
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
@@ -45,9 +56,9 @@ class AboutPage extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              new Text('A Propos'),
-              new Text('Collaborateurs'),
-              new Text('Social')
+              AboutWidget(),
+              CollaborateursWidget(),
+              SocialWidget(),
             ],
           ),
         ),

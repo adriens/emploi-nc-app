@@ -12,9 +12,9 @@ const Map<String, String> HEADERS = {
 
 class EmploiService {
 
-  static Future<List<Emploi>> getLatestEmplois() async{
+  static Future<List<Emploi>> getLatestEmplois(String nb) async{
 
-    var response= await http.get('https://emploi-nouvelle-caledonie.p.rapidapi.com/emploi/latest/4', headers : HEADERS );
+    var response= await http.get('https://emploi-nouvelle-caledonie.p.rapidapi.com/emploi/latest/'+nb, headers : HEADERS );
       print("Status : "+response.statusCode.toString() );
       print("URL <"+response.request.toString()+">");
       print("Reponse 1<"+response.body+">");

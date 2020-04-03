@@ -30,7 +30,7 @@ class _GridViewWidget extends State<GridViewWidget> {
   Future<List<Emploi>> emplois;
 
   _refresh() {
-    emplois = EmploiService.getLatestEmplois();
+    emplois = EmploiService.getLatestEmplois("4");
   }
 
   @override
@@ -121,11 +121,22 @@ class _GridViewWidget extends State<GridViewWidget> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               new Text(snapshot.data[index].communeEmploi),
-                              new Text(snapshot.data[index].aPourvoirLe)
                             ]
                         ),
                       ),
                     ),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
+                      child: Container(
+                        width: 260,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              new Text(snapshot.data[index].aPourvoirLe),
+                            ]
+                          ),
+                        ),
+                      ),
                   ],
                 ),
               ),
