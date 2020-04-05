@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:EmploiNC/Widget/GridView.dart';
 
-class HomePage extends StatelessWidget {
+class DefaultPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,35 +23,34 @@ class HomePage extends StatelessWidget {
           appBar: AppBar(
             backgroundColor:  Colors.blue[900],
             flexibleSpace: new Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children : [
-                TabBar(
-                  tabs: [
-                    Tab(
-                      child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children : [
+                  TabBar(
+                    tabs: [
+                      Tab(
+                        child: Row(
                           children: <Widget>[
-                            Expanded(child: Icon(Icons.history)),
-                            Expanded(child: new Text('Récentes'))
+                            Expanded(child: new Text('1'))
+
                           ],
+                        ),
                       ),
-                    ),
-                    Tab(
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(child: Icon(Icons.list)),
-                          Expanded(child: new Text('Toutes'))
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ]
+                      Tab(
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(child: new Text('2'))
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ]
             ),
           ),
           body: TabBarView(
             children: [
-              GridViewWidget(),
-              ListOffers(),
+              Text('1'),
+              Text('2')
             ],
           ),
         ),

@@ -104,7 +104,7 @@ class _AboutWidget extends State<AboutWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     new Text("Version"),
-                    new Text("1.0.2")
+                    new Text("1.0.3")
                   ]
               ),
             ),

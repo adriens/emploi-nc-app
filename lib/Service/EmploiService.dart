@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import '../Model/Emploi.dart';
-import '../app_config.dart';
+import 'package:EmploiNC/Model/Emploi.dart';
+import 'package:EmploiNC/app_config.dart';
 
 const Map<String, String> HEADERS = {
   'x-rapidapi-key': apiKey,

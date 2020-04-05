@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
 
-import '../Service/StatsService.dart';
+import 'package:EmploiNC/Service/StatsService.dart';
 
 class StatsWidget extends StatefulWidget {
   @override

@@ -1,10 +1,11 @@
-import 'file:///C:/Users/JAVAE/Documents/emploi-nc-app/lib/Page/HomePage.dart';
-import 'Widget/PlaceHolder.dart';
+import 'package:EmploiNC/Page/DefaultPage.dart';
+import 'package:EmploiNC/Page/HomePage.dart';
+import 'package:EmploiNC/Widget/PlaceHolder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'Page/AboutPage.dart';
-import 'Page/SearchPage.dart';
-import 'Page/StatsPage.dart';
+import 'package:EmploiNC/Page/AboutPage.dart';
+import 'package:EmploiNC/Page/SearchPage.dart';
+import 'package:EmploiNC/Page/StatsPage.dart';
 
 
 class RoutePage extends StatefulWidget {
@@ -17,7 +18,7 @@ class _RoutePageState extends State<RoutePage> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     PlaceholderWidget( HomePage() ),
-    PlaceholderWidget( HomePage() ),
+    PlaceholderWidget( DefaultPage() ),
     PlaceholderWidget( SearchPage() ),
     PlaceholderWidget( StatsPage() ),
     PlaceholderWidget( AboutPage() )
