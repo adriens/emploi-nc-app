@@ -37,7 +37,7 @@ class _CollaborateursWidget extends State<CollaborateursWidget> {
   @override
   Widget build(BuildContext context) {
     final names = [
-      'Adrien Salès',
+      'Adrien Sales',
       'Ronny Soutart',
       'Emilie Bossart',
       'Jimmy Avae'

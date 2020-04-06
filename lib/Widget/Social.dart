@@ -53,7 +53,7 @@ class _SocialWidget extends State<SocialWidget> {
       'https://emploi.gouv.nc/',
       'https://adriens.github.io/emploi-nc-website',
       'https://github.com/adriens/emploi-nc-app',
-      'en cours',
+      'https://www.youtube.com/playlist?list=PLVaySOddZPMer1H6o234RyWhEfSThuYW5',
       'https://twitter.com/NcEmploi'
     ];
     return ListView.builder(
