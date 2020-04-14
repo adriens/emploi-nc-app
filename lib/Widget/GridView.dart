@@ -65,15 +65,6 @@ class _GridViewWidget extends State<GridViewWidget> {
     var width = (screenWidth - ((_crossAxisCount - 1) * _crossAxisSpacing)) / _crossAxisCount;
     var height = width / _aspectRatio ;
 
-    var bg_colors = [
-      {'Colors': Color.fromRGBO(255, 255, 255, 0.9)},
-      {'Colors': Color.fromRGBO(255, 255, 255, 0.9)},
-      {'Colors': Color.fromRGBO(255, 255, 255, 0.9)},
-      {'Colors': Color.fromRGBO(255, 255, 255, 0.9)},
-      {'Colors': Color.fromRGBO(255, 255, 255, 0.9)},
-      {'Colors':Color.fromRGBO(255, 255, 255, 0.9)},
-      ];
-
     return GridView.builder(
         itemCount: snapshot.data.length,
         gridDelegate:
@@ -86,7 +77,6 @@ class _GridViewWidget extends State<GridViewWidget> {
         itemBuilder: (BuildContext context, int index) {
           return  ListView(
             padding: EdgeInsets.all(8),
-
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.fromLTRB(10, 2, 0, 0),
@@ -155,5 +145,6 @@ class _GridViewWidget extends State<GridViewWidget> {
         );
     });
   }
+
 }
 

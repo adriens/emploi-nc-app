@@ -52,7 +52,7 @@ class _AboutWidget extends State<AboutWidget> {
 
       children: [
         Card(
-        child: Column(
+          child: Column(
           children: [
             Padding(
               padding: EdgeInsets.all(16.0),
@@ -104,7 +104,7 @@ class _AboutWidget extends State<AboutWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     new Text("Version"),
-                    new Text("1.0.4")
+                    new Text("1.0.5")
                   ]
               ),
             ),

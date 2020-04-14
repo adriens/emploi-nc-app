@@ -25,7 +25,7 @@ class _ListOffers extends State<ListOffers> {
   Future<List<Emploi>> emplois;
 
   _refresh() {
-    emplois = EmploiService.getLatestEmplois("10");
+    emplois = EmploiService.getLatestEmplois("25");
   }
 
   @override
@@ -40,6 +40,15 @@ class _ListOffers extends State<ListOffers> {
 
   @override
   Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+      new Text('Chargement des 25 dernières Offres'),
+      Expanded(child:_buildList(context))
+      ],
+    );
+  }
+
+  Widget _buildList(BuildContext context){
     return Scaffold(
       body: FutureBuilder<List<Emploi>>(
           future: emplois,
@@ -48,7 +57,6 @@ class _ListOffers extends State<ListOffers> {
               return ListView.builder(
                   itemCount: 10,
                   // Important code
-
                   itemBuilder: (context, index) => Shimmer.fromColors(
                     child: Card (
                         child: InkWell(

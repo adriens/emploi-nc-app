@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:EmploiNC/Widget/GridView.dart';
+import 'package:flutter_offline/flutter_offline.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -50,8 +51,53 @@ class HomePage extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              GridViewWidget(),
-              ListOffers(),
+              OfflineBuilder(
+                connectivityBuilder: (
+                    BuildContext context,
+                    ConnectivityResult connectivity,
+                    Widget child,
+                    ) {
+                  final bool connected = connectivity != ConnectivityResult.none;
+                  return new Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Center(
+                        child:  connected ? GridViewWidget() : Text("Hors Ligne"),
+                      ),
+                    ],
+                  );
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new GridViewWidget(),
+                  ],
+                ),
+              ),
+              OfflineBuilder(
+                connectivityBuilder: (
+                    BuildContext context,
+                    ConnectivityResult connectivity,
+                    Widget child,
+                    ) {
+                  final bool connected = connectivity != ConnectivityResult.none;
+                  return new Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Center(
+                        child:  connected ? ListOffers() : Text("Hors Ligne"),
+                      ),
+                    ],
+                  );
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new ListOffers(),
+                  ],
+                ),
+              ),
+
             ],
           ),
         ),

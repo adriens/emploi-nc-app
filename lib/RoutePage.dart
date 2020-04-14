@@ -18,7 +18,7 @@ class _RoutePageState extends State<RoutePage> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     PlaceholderWidget( HomePage() ),
-    PlaceholderWidget( DefaultPage() ),
+    //PlaceholderWidget( DefaultPage() ),
     PlaceholderWidget( SearchPage() ),
     PlaceholderWidget( StatsPage() ),
     PlaceholderWidget( AboutPage() )
@@ -43,11 +43,11 @@ class _RoutePageState extends State<RoutePage> {
             backgroundColor:  Colors.blue[900],
             title: new Text('Offres'),
           ),
-          BottomNavigationBarItem(
-            icon: new Icon(Icons.mail),
+          /*BottomNavigationBarItem(
+            icon: new Icon(Icons.group_work),
             backgroundColor:  Colors.blue[900],
             title: new Text('Libre'),
-          ),
+          ),*/
           BottomNavigationBarItem(
             icon: new Icon(Icons.search),
             backgroundColor:  Colors.blue[900],

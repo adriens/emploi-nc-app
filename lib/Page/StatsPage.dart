@@ -2,6 +2,7 @@ import 'package:EmploiNC/Widget/ListOffers.dart';
 import 'package:EmploiNC/Widget/Stats.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_offline/flutter_offline.dart';
 
 class StatsPage extends StatelessWidget {
   @override
@@ -38,13 +39,31 @@ class StatsPage extends StatelessWidget {
                 ]
             ),
           ),
-          body: TabBarView(
-            children: [
+          body: OfflineBuilder(
+            connectivityBuilder: (
+              BuildContext context,
+              ConnectivityResult connectivity,
+              Widget child,
+            ) {
+              final bool connected = connectivity != ConnectivityResult.none;
+              return new Stack(
+                fit: StackFit.expand,
+                children: [
+                  Center(
+                    child:  connected ? StatsWidget() : Text("Hors Ligne"),
+                  ),
+                ],
+              );
+            },
+            child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
               new StatsWidget(),
             ],
           ),
+          ),
         ),
-      ),
+      )
     );
   }
 }
