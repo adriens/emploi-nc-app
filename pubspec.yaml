@@ -18,6 +18,9 @@ environment:
 
 dependencies:
   flutter_offline:
+  flutter_localizations:
+    sdk: flutter
+  date_picker_timeline: ^1.2.0
   flutter:
     sdk: flutter
   http:

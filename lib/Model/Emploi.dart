@@ -4,7 +4,7 @@ import 'dart:io' as Io;
 class Emploi {
 
   String titreOffre;
-  String logo;
+  String logo = null;
   String typeContrat;
   String aPourvoirLe;
   String communeEmploi;
@@ -30,7 +30,7 @@ class Emploi {
     );
 
   decodeLogo(){
-    return this.logo != null ? base64.decode(this.logo) : base64.decode(DEFAULT_LOGO);
+    return (this.logo != null ) ? base64.decode(this.logo) : base64.decode(DEFAULT_LOGO);
   }
 
 }

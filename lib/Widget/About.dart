@@ -108,8 +108,6 @@ class _AboutWidget extends State<AboutWidget> {
                   ]
               ),
             ),
-
-
           ],
         ),
       ),]
