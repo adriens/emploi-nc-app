@@ -24,9 +24,11 @@ class _ListOffers extends State<ListOffers> {
   // List of Items
   Future<List<Emploi>> emplois;
 
-  _refresh() {
+  _refresh()   {
     emplois = EmploiService.getLatestEmplois("25");
+
   }
+
 
   @override
   void initState() {

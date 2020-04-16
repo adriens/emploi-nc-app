@@ -65,6 +65,7 @@ class _GridViewWidget extends State<GridViewWidget> {
     final double itemWidth = size.width / 2;
 
     return GridView.builder(
+
         itemCount: snapshot.data.length,
         gridDelegate:
         new SliverGridDelegateWithFixedCrossAxisCount(
@@ -73,11 +74,11 @@ class _GridViewWidget extends State<GridViewWidget> {
         ),
         itemBuilder: (BuildContext context, int index) {
           return  ListView(
+
             padding: EdgeInsets.all(8),
             children: <Widget>[
-              Container(
-
-                padding: EdgeInsets.fromLTRB(10, 2, 0, 0),
+              InkWell(
+                onTap: () => launch(snapshot.data[index].url),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -134,14 +135,15 @@ class _GridViewWidget extends State<GridViewWidget> {
                 ),
               ),
               SizedBox(
-
-                child:
-                     Image.memory(
-                        snapshot.data[index].decodeLogo(),
-                        fit: BoxFit.contain,
-                        color: const Color.fromRGBO(255, 255, 255, 0.5),
-                        colorBlendMode: BlendMode.modulate
-                    )
+                child:InkWell(
+                    onTap: () => launch(snapshot.data[index].url),
+                    child:Image.memory(
+                    snapshot.data[index].decodeLogo(),
+                    fit: BoxFit.contain,
+                    color: const Color.fromRGBO(255, 255, 255, 0.5),
+                    colorBlendMode: BlendMode.modulate
+                )
+                )
                 ),
           ],
         );
