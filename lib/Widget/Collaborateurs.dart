@@ -49,7 +49,7 @@ class _CollaborateursWidget extends State<CollaborateursWidget> {
       'jimmyavae.png'
     ];
     final desc = [
-      'CEO/CIO et initiateur',
+      'CEO/CIO',
       'Conseil dev. Flutter et ergonomie',
       'Graphic Designer',
       'Lead Developer'

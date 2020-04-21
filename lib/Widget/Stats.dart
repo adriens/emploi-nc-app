@@ -6,12 +6,14 @@ import 'package:flutter/animation.dart';
 import 'package:EmploiNC/Service/StatsService.dart';
 
 class StatsWidget extends StatefulWidget {
+
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Text("Stats"),
     );
   }
+
   StatsWidget({
     Key key,
     this.title,
@@ -31,13 +33,11 @@ class _StatsWidget extends State<StatsWidget> with SingleTickerProviderStateMixi
 
   AnimationController _animationController;
 
-  // List of Items
   Future<Stats> stats;
 
   _refresh() {
     stats = StatsService.getStats();
   }
-
 
   @override
   void initState() {
@@ -57,8 +57,6 @@ class _StatsWidget extends State<StatsWidget> with SingleTickerProviderStateMixi
     _animationController.forward();
   }
 
-
-
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
   static const String _title = 'Stats';
 
@@ -70,26 +68,31 @@ class _StatsWidget extends State<StatsWidget> with SingleTickerProviderStateMixi
         if (snapshot.hasData) {
           return buildStatsAfter(snapshot);
         } else if (snapshot.hasError) {
-          return Text("WHAT :" + snapshot.error.toString());
+          return Text("Erreur :");
         }
         return buildStatsBefore();
       },
     );
-
   }
 
-
   Widget buildStatsAfter(AsyncSnapshot<Stats> snapshot) {
+
+      var size = MediaQuery.of(context).size;
+      final double itemHeight = (size.height - kToolbarHeight - 24) / 4;
+      final double itemWidth = size.width / 2;
+
        return new Scaffold(
           body: new Center(
               child: GridView(
                   scrollDirection: Axis.vertical,
                   controller: ScrollController(),
-                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 200.0),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      childAspectRatio: (itemWidth / itemHeight),
+                      crossAxisCount: 2
+                  ),
                   children:
                   <Widget>[
-                    Container(
+                    Container(height:100,
                       padding: EdgeInsets.all(20.0),
                       child: Center(
                         child: GridTile(
@@ -201,7 +204,9 @@ class _StatsWidget extends State<StatsWidget> with SingleTickerProviderStateMixi
   }
 
   Widget buildStatsBefore() {
-
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 4;
+    final double itemWidth = size.width / 2;
     Widget _buildItemForColor(Color c) =>
         DecoratedBox(decoration: BoxDecoration(color: c));
 
@@ -212,6 +217,7 @@ class _StatsWidget extends State<StatsWidget> with SingleTickerProviderStateMixi
             scrollDirection: Axis.vertical,
             controller: ScrollController(),
             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                childAspectRatio: (itemWidth / itemHeight),
                 maxCrossAxisExtent: 200.0),
             children:
               <Widget>[
@@ -324,27 +330,6 @@ class _StatsWidget extends State<StatsWidget> with SingleTickerProviderStateMixi
           );
         });
 
-  }
-
-  Column _buildStatsColumn(Color color, IconData icon, String label) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(icon, color: color),
-        Container(
-          margin: const EdgeInsets.only(top: 8),
-          child: Text(
-            label,
-            style: TextStyle(
-              fontSize: 52.0,
-              fontWeight: FontWeight.w400,
-              color: color,
-            ),
-          ),
-        ),
-      ],
-    );
   }
 
 
