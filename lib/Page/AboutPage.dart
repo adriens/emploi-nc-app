@@ -1,4 +1,3 @@
-import 'package:EmploiNC/Widget/ListOffers.dart';
 import 'package:EmploiNC/Widget/About.dart';
 import 'package:EmploiNC/Widget/Social.dart';
 import 'package:EmploiNC/Widget/Collaborateurs.dart';

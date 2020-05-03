@@ -1,10 +1,9 @@
 import 'dart:convert';
-import 'dart:io' as Io;
 
 class Emploi {
 
   String titreOffre;
-  String logo = null;
+  String logo;
   String typeContrat;
   String aPourvoirLe;
   String communeEmploi;

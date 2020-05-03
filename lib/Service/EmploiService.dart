@@ -43,7 +43,7 @@ class EmploiService {
     if ( contrat.contains("Tout")) contrat = "none";
     if ( search.isEmpty || search == "" || search == null ) search = "none";
 
-    if ( datedebut.isAfter(datefin) ) { date1 = "none";date2 = "none";};
+    if ( datedebut.isAfter(datefin) )  date1 = "none";date2 = "none";
     var response= await http.get('https://emploi-nouvelle-caledonie.p.rapidapi.com/search/'+nb+"/"+search+"/"+commune+"/"+contrat+"/"+date1+"/"+date2, headers : HEADERS );
 
     print("Status : "+response.statusCode.toString() );

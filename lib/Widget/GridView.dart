@@ -1,17 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:EmploiNC/Model/Emploi.dart';
 import 'package:EmploiNC/Service/EmploiService.dart';
 
 class GridViewWidget extends StatefulWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text("GridView"),
-    );
-  }
+
   GridViewWidget({
     Key key,
     this.title,
@@ -38,9 +32,6 @@ class _GridViewWidget extends State<GridViewWidget> {
     super.initState();
     _refresh();
   }
-
-  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
-  static const String _title = 'GridView';
 
   @override
   Widget build(BuildContext context) {

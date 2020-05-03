@@ -55,8 +55,6 @@ class _SearchWidget extends State<SearchWidget> {
     _refreshInit();
   }
 
-  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
-
   _SearchWidget() {
     _filter.addListener(() {
       if ( _filter.text.isEmpty ) {

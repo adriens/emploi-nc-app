@@ -3,12 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SocialWidget extends StatefulWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text("Social"),
-    );
-  }
+
   SocialWidget({
     Key key,
     this.title,
@@ -29,9 +24,6 @@ class _SocialWidget extends State<SocialWidget> {
     // TODO: implement initState
     super.initState();
   }
-
-  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
-  static const String _title = 'Social';
 
   @override
   Widget build(BuildContext context) {

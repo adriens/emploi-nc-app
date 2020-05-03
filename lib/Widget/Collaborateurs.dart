@@ -4,12 +4,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CollaborateursWidget extends StatefulWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text("Collaborateurs"),
-    );
-  }
+
   CollaborateursWidget({
     Key key,
     this.title,
@@ -30,9 +25,6 @@ class _CollaborateursWidget extends State<CollaborateursWidget> {
     // TODO: implement initState
     super.initState();
   }
-
-  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
-  static const String _title = 'Collaborateurs';
 
   @override
   Widget build(BuildContext context) {

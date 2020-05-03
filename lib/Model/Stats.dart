@@ -1,5 +1,3 @@
-import 'dart:convert';
-import 'dart:io' as Io;
 
 class Stats {
 
@@ -19,6 +17,5 @@ class Stats {
           nbOffresPublieesEnCours: json['nbOffresPublieesEnCours'],
           nbEmployeursAvecOffresPubliees: json['nbEmployeursAvecOffresPubliees'],
       );
-
 
 }
