@@ -30,21 +30,26 @@ class DBProvider {
         onCreate: (Database db, int version) async {
           await db.execute('CREATE TABLE EmploiSQLITE('
               'id INTEGER PRIMARY KEY,'
-              'titreOffre TEXT'
+              'titreOffre TEXT,'
+              'typeContrat TEXT,'
+              //'logo TEXT,'
+              'aPourvoirLe TEXT,'
+              'communeEmploi TEXT,'
+              'url TEXT UNIQUE'
               ')');
         });
   }
 
-  // Insert employee on database
-  createEmployee(EmploiSQLITE newEmploiSQLITE) async {
-    await deleteAllEmploiSQLITE();
+  // Insert emplois on database
+  createEmploi(EmploiSQLITE newEmploiSQLITE) async {
+    //await deleteAllEmploiSQLITE();
     final db = await database;
     final res = await db.insert('EmploiSQLITE', newEmploiSQLITE.toJson());
 
     return res;
   }
 
-  // Delete all employees
+  // Delete all emplois
   Future<int> deleteAllEmploiSQLITE() async {
     final db = await database;
     final res = await db.rawDelete('DELETE FROM EmploiSQLITE');

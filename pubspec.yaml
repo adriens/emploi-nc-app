@@ -28,6 +28,8 @@ dependencies:
   path:
   path_provider:
   dio:
+  expandable:
+  pull_to_refresh:
   url_launcher:
   flutter_layout_grid:
   # The following adds the Cupertino Icons font to your application.

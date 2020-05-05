@@ -25,7 +25,7 @@ class EmploiSQLITEApiProvider {
 
     return (response.data as List).map((emploi) {
       print('Inserting $emploi');
-      DBProvider.db.createEmployee(EmploiSQLITE.fromJson(emploi));
+      DBProvider.db.createEmploi(EmploiSQLITE.fromJson(emploi));
     }).toList();
   }
 }
