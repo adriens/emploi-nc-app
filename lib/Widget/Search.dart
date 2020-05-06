@@ -215,9 +215,9 @@ class _SearchWidget extends State<SearchWidget> {
                                             date.day.toString().length == 2 ? day =  date.day.toString() : day = day + date.day.toString();
                                             date.month.toString().length == 2 ? month =  date.month.toString() : month = month + date.month.toString();
                                             if ( _valueDateEnd.isNotEmpty && start.isAfter(end)) {
-                                              String tmp = _valueDateStart;
-                                              _valueDateStart = _valueDateEnd;
-                                              _valueDateEnd = tmp;
+                                              String tmp = _valueDateEnd.toString();
+                                              _valueDateEnd = day+"/"+month+"/"+date.year.toString();
+                                              _valueDateStart = tmp;
                                             }else{
                                               _valueDateStart = day+"/"+month+"/"+date.year.toString();
                                             }
@@ -243,8 +243,8 @@ class _SearchWidget extends State<SearchWidget> {
                                             date.day.toString().length == 2 ? day =  date.day.toString() : day = day + date.day.toString();
                                             date.month.toString().length == 2 ? month =  date.month.toString() : month = month + date.month.toString();
                                             if ( _valueDateStart.isNotEmpty && start.isAfter(end)) {
-                                              String tmp = _valueDateStart;
-                                              _valueDateStart = _valueDateEnd;
+                                              String tmp = _valueDateStart.toString();
+                                              _valueDateStart = day+"/"+month+"/"+date.year.toString();
                                               _valueDateEnd = tmp;
 
                                             }else{

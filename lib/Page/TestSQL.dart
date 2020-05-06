@@ -1,4 +1,4 @@
-import 'package:EmploiNC/Widget/TestSQLWidget.dart';
+import 'package:EmploiNC/Widget/AllOffers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +40,7 @@ class TestSQL extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              TestSQLWidget(),
+              AllOffers(),
             ],
           ),
         ),

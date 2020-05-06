@@ -14,9 +14,9 @@ import 'dart:ui' as ui;
 
 const loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
-class TestSQLWidget extends StatefulWidget {
+class AllOffers extends StatefulWidget {
 
-  TestSQLWidget({
+  AllOffers({
     Key key,
     this.title,
   }): super(key : key);
@@ -24,11 +24,11 @@ class TestSQLWidget extends StatefulWidget {
   final String title;
 
   @override
-  _TestSQLWidget createState() => _TestSQLWidget();
+  _AllOffers createState() => _AllOffers();
 
 }
 
-class _TestSQLWidget extends State<TestSQLWidget> {
+class _AllOffers extends State<AllOffers> {
 
 
   var refreshKey = GlobalKey<RefreshIndicatorState>();

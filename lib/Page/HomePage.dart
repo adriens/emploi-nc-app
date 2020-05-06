@@ -1,3 +1,4 @@
+import 'package:EmploiNC/Widget/AllOffers.dart';
 import 'package:EmploiNC/Widget/ListOffers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +86,7 @@ class HomePage extends StatelessWidget {
                     fit: StackFit.expand,
                     children: [
                       Center(
-                        child:  connected ? ListOffers() : Text("Hors Ligne"),
+                        child:  connected ? AllOffers() : Text("Hors Ligne"),
                       ),
                     ],
                   );
@@ -93,7 +94,7 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    new ListOffers(),
+                    new AllOffers(),
                   ],
                 ),
               ),
