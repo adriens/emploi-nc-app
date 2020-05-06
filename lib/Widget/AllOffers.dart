@@ -12,6 +12,8 @@ import 'package:flutter/services.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'dart:ui' as ui;
 
+import 'package:url_launcher/url_launcher.dart';
+
 const loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
 class AllOffers extends StatefulWidget {
@@ -106,58 +108,78 @@ class _AllOffers extends State<AllOffers> {
                   child: FlatButton(
                     child: Text("Charger plus"),
                     onPressed: () {
+                      // TODO: Attente de la mise à jour de l'api pour charger plus d'offres
                     },
                   ),
                 )
-                : Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text('Anonyme',
-                          style: TextStyle(
-                            color: Colors.grey[600],
-                          )
-                        ),
-                        Text('${snapshot.data[index].aPourvoirLe}',
-                          style: TextStyle(
-                            color: Colors.grey[600],
-                          )
-                        ),
-                      ]
-                    ),
-                    ListTile(
-                      leading: Image.memory(
-                      decodeLogo(),
-                      fit: BoxFit.contain,
-                        color: const Color.fromRGBO(255, 255, 255, 0.5),
-                        colorBlendMode: BlendMode.modulate
-                      ),
-                      title: Text(
-                        "${snapshot.data[index].titreOffre}"
-                      ),
-                      isThreeLine: true,
-                      subtitle: Text(
-                        '${snapshot.data[index].typeContrat}'
-                        '\n${snapshot.data[index].communeEmploi}'
-                        '\nA pourvoir le: ${snapshot.data[index].aPourvoirLe}'
-                      )
-                    ),
-                    ExpandableNotifier(
-                      child: Column(
+                : InkWell(
+                  onTap: () => launch(snapshot.data[index].url),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          ExpandablePanel(
-                            iconColor: Colors.white,
-                            header: Padding(
-                              padding: EdgeInsets.all(10),
-                              child:  Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround  ,
-                                children: <Widget>[
-                                GestureDetector(
-                                  child: Row(
+                          Text('Anonyme',
+                            style: TextStyle(
+                              color: Colors.grey[600],
+                            )
+                          ),
+                          Text('${snapshot.data[index].aPourvoirLe}',
+                            style: TextStyle(
+                              color: Colors.grey[600],
+                            )
+                          ),
+                        ]
+                      ),
+                      ListTile(
+                        leading: Image.memory(
+                        decodeLogo(),
+                        fit: BoxFit.contain,
+                          color: const Color.fromRGBO(255, 255, 255, 0.5),
+                          colorBlendMode: BlendMode.modulate
+                        ),
+                        title: Text(
+                          "${snapshot.data[index].titreOffre}"
+                        ),
+                        isThreeLine: true,
+                        subtitle: Text(
+                          '${snapshot.data[index].typeContrat}'
+                          '\n${snapshot.data[index].communeEmploi}'
+                          '\nA pourvoir le: ${snapshot.data[index].aPourvoirLe}'
+                        )
+                      ),
+                      ExpandableNotifier(
+                        child: Column(
+                          children: <Widget>[
+                            ExpandablePanel(
+                              iconColor: Colors.white,
+                              header: Padding(
+                                padding: EdgeInsets.all(10),
+                                child:  Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround  ,
+                                  children: <Widget>[
+                                  GestureDetector(
+                                    child: Row(
+                                      children: <Widget>[
+                                        Icon(Icons.favorite_border,color: Colors.grey[600],size: 16.0),
+                                        Text("XXX",
+                                          style: TextStyle(
+                                            color: Colors.grey[600],
+                                            fontSize: 8
+                                          )
+                                        ),
+                                      ]
+                                    ),
+                                    onTap: () {
+                                        final snackBar = SnackBar(content: Text("Tap"));
+
+                                        Scaffold.of(context).showSnackBar(snackBar);
+                                    },
+                                  ),
+                                  Row(
                                     children: <Widget>[
-                                      Icon(Icons.favorite_border,color: Colors.grey[600],size: 16.0),
+                                      Icon(Icons.visibility,color: Colors.grey[600],size: 16.0),
                                       Text("XXX",
                                         style: TextStyle(
                                           color: Colors.grey[600],
@@ -166,58 +188,42 @@ class _AllOffers extends State<AllOffers> {
                                       ),
                                     ]
                                   ),
-                                  onTap: () {
-                                      final snackBar = SnackBar(content: Text("Tap"));
-
-                                      Scaffold.of(context).showSnackBar(snackBar);
-                                  },
+                                  GestureDetector(
+                                    onTap: () {
+                                      _showDialog(
+                                          snapshot.data[index].titreOffre,
+                                          snapshot.data[index].typeContrat,
+                                          snapshot.data[index].communeEmploi,
+                                          snapshot.data[index].aPourvoirLe,
+                                          snapshot.data[index].url
+                                      );
+                                    },
+                                    child:Row(
+                                      children: <Widget>[
+                                        Icon(Icons.share,color: Colors.grey[600],size: 16.0)
+                                      ]
+                                    )
+                                  ),
+                                ]
                                 ),
-                                Row(
-                                  children: <Widget>[
-                                    Icon(Icons.visibility,color: Colors.grey[600],size: 16.0),
-                                    Text("XXX",
-                                      style: TextStyle(
-                                        color: Colors.grey[600],
-                                        fontSize: 8
-                                      )
-                                    ),
-                                  ]
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    _showDialog(
-                                        snapshot.data[index].titreOffre,
-                                        snapshot.data[index].typeContrat,
-                                        snapshot.data[index].communeEmploi,
-                                        snapshot.data[index].aPourvoirLe,
-                                        snapshot.data[index].url
-                                    );
-                                  },
-                                  child:Row(
-                                    children: <Widget>[
-                                      Icon(Icons.share,color: Colors.grey[600],size: 16.0)
-                                    ]
-                                  )
-                                ),
-                              ]
                               ),
-                            ),
-                            collapsed: Text(loremIpsum, softWrap: false, overflow: TextOverflow.ellipsis,),
-                            expanded: Text(loremIpsum, softWrap: true, overflow: TextOverflow.fade,),
-                            builder: (_, collapsed, expanded) {
-                              return Padding(
-                                padding: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
-                                child: Expandable(
-                                  collapsed: collapsed,
-                                  expanded: expanded,
-                                ),
-                              );
-                             },
-                            ),
-                          ],
+                              collapsed: Text(loremIpsum, softWrap: false, overflow: TextOverflow.ellipsis,),
+                              expanded: Text(loremIpsum, softWrap: true, overflow: TextOverflow.fade,),
+                              builder: (_, collapsed, expanded) {
+                                return Padding(
+                                  padding: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
+                                  child: Expandable(
+                                    collapsed: collapsed,
+                                    expanded: expanded,
+                                  ),
+                                );
+                               },
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                ],
+                  ],
+                  ),
                 );
 
               },
