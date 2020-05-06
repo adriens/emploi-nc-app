@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'MyApp.dart';
 
+void main()  async {
+  runApp( MyApp() );
+}
 
-void main() => runApp( MyApp() );
+
 
 

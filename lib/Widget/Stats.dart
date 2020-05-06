@@ -7,13 +7,6 @@ import 'package:EmploiNC/Service/StatsService.dart';
 
 class StatsWidget extends StatefulWidget {
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text("Stats"),
-    );
-  }
-
   StatsWidget({
     Key key,
     this.title,
@@ -56,9 +49,6 @@ class _StatsWidget extends State<StatsWidget> with SingleTickerProviderStateMixi
 
     _animationController.forward();
   }
-
-  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
-  static const String _title = 'Stats';
 
   @override
   Widget build(BuildContext context) {
@@ -207,8 +197,6 @@ class _StatsWidget extends State<StatsWidget> with SingleTickerProviderStateMixi
     var size = MediaQuery.of(context).size;
     final double itemHeight = (size.height - kToolbarHeight - 24) / 4;
     final double itemWidth = size.width / 2;
-    Widget _buildItemForColor(Color c) =>
-        DecoratedBox(decoration: BoxDecoration(color: c));
 
     return AnimatedBuilder(
         animation: _animationController,

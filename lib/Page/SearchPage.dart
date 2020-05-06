@@ -1,4 +1,3 @@
-import 'package:EmploiNC/Widget/ListOffers.dart';
 import 'package:EmploiNC/Widget/Search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

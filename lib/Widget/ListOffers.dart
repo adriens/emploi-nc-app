@@ -37,9 +37,6 @@ class _ListOffers extends State<ListOffers> {
     _refresh();
   }
 
-  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
-  static const String _title = 'Emploi NC';
-
   @override
   Widget build(BuildContext context) {
     return Column(

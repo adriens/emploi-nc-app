@@ -20,11 +20,18 @@ dependencies:
   flutter_offline:
   flutter_localizations:
     sdk: flutter
-  date_picker_timeline: ^1.2.0
+  flutter_datetime_picker:
   flutter:
     sdk: flutter
+  sqflite:
   http:
+  qr_flutter:
   path:
+  path_provider:
+  dio:
+  expandable:
+  pull_to_refresh:
+  esys_flutter_share:
   url_launcher:
   flutter_layout_grid:
   # The following adds the Cupertino Icons font to your application.

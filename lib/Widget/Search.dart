@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:date_picker_timeline/date_picker_timeline.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:shimmer/shimmer.dart';
 
 class SearchWidget extends StatefulWidget {
@@ -33,11 +33,8 @@ class _SearchWidget extends State<SearchWidget> {
   Icon _searchIcon = new Icon(Icons.search);
   Widget _appBarTitle = new Text( 'Rechercher');
 
-  DatePickerController _controllerDebut = DatePickerController();
-  DatePickerController _controllerFin = DatePickerController();
-
   _refresh()  async {
-   emplois = EmploiService.getSearch("20",_searchText,_selectedCommunes,_selectedContrat,_selectedDateDebut,_selectedDateFin);
+   emplois = EmploiService.getSearch("20",_searchText,_selectedCommunes,_selectedContrat,_valueDateStart,_valueDateEnd);
 
    OverlayState overlayState = Overlay.of(context);
    OverlayEntry overlayEntry = new OverlayEntry(builder: _buildLoader);
@@ -47,15 +44,13 @@ class _SearchWidget extends State<SearchWidget> {
 
   }
   _refreshInit() {
-    emplois = EmploiService.getSearch("20",_searchText,_selectedCommunes,_selectedContrat,_selectedDateDebut,_selectedDateFin);
+    emplois = EmploiService.getSearch("20",_searchText,_selectedCommunes,_selectedContrat,_valueDateStart,_valueDateEnd);
   }
   @override
   void initState() {
     super.initState();
     _refreshInit();
   }
-
-  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
 
   _SearchWidget() {
     _filter.addListener(() {
@@ -81,10 +76,13 @@ class _SearchWidget extends State<SearchWidget> {
     'Ouvéa','Lifou','Maré'];
   String _selectedCommunes ='Toutes';
 
-  DateTime _selectedDateFin = DateTime.now();
-  DateTime _selectedDateDebut = new DateTime.now().subtract(new Duration(days: 7));
-
+  String _valueDateStart = '';
+  String _valueDateEnd = '';
+  DateTime start;
+  DateTime end;
   Widget build(BuildContext context) {
+
+
     return DefaultTabController(
         length: 2,
         child: Scaffold(
@@ -128,7 +126,6 @@ class _SearchWidget extends State<SearchWidget> {
                       Center(
                         child:  connected ? Column(
                             children:<Widget> [
-
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: <Widget>[
@@ -197,47 +194,82 @@ class _SearchWidget extends State<SearchWidget> {
                                 ],
                               ),
                               Container(
-                              child: Text("Date Prise de poste au plus tot")
+                                  child: Text("Intervalle de date :")
                               ),
-                              Container(
-                              child: DatePicker(
-                                  DateTime.now().add(Duration(days: -30)),
-                                  width: 60,
-                                  height: 80,
-                                  controller: _controllerDebut,
-                                  locale :'fr',
-                                  initialSelectedDate:  _selectedDateDebut,
-                                  selectionColor: Colors.black,
-                                  selectedTextColor: Colors.white,
-                                  onDateChange: (date) {
-                                  // New date selected
-                                  setState(() {
-                                    _selectedDateDebut = date;
-                                });
-                                },
-                                )
-                              ),
-                              Container(
-                                  child: Text("Date Prise de poste au plus tard")
-                              ),
-                              Container(
-                                  child: DatePicker(
-                                    DateTime.now().add(Duration(days: -7)),
-                                    width: 60,
-                                    height: 80,
-                                    controller: _controllerFin,
-                                    locale :'fr',
-                                    initialSelectedDate: _selectedDateFin,
-                                    selectionColor: Colors.black,
-                                    selectedTextColor: Colors.white,
-                                    onDateChange: (date) {
-                                      // New date selected
-                                      setState(() {
-                                        _selectedDateFin = date;
-                                      });
-                                    },
-                                  )
-                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+
+                                  RaisedButton( onPressed: () {
+                                    DatePicker.showDatePicker(context,
+                                        showTitleActions: true,
+                                        minTime: DateTime(2018, 1, 1),
+                                        maxTime: DateTime(2021, 12,12), onChanged: (date) {
+                                          print('change $date');
+                                        }, onConfirm: (date) {
+                                          setState(() {
+                                            start = date;
+
+                                            String day = "0";
+                                            String month = "0";
+                                            date.day.toString().length == 2 ? day =  date.day.toString() : day = day + date.day.toString();
+                                            date.month.toString().length == 2 ? month =  date.month.toString() : month = month + date.month.toString();
+                                            if ( _valueDateEnd.isNotEmpty && start.isAfter(end)) {
+                                              String tmp = _valueDateEnd.toString();
+                                              _valueDateEnd = day+"/"+month+"/"+date.year.toString();
+                                              _valueDateStart = tmp;
+                                            }else{
+                                              _valueDateStart = day+"/"+month+"/"+date.year.toString();
+                                            }
+
+                                          });
+                                          print('confirm $date');
+                                        }, currentTime: DateTime.now(), locale: LocaleType.fr);
+                                  },
+                                      child: Text(
+                                          "Début"
+                                      )),
+                                  RaisedButton( onPressed: () {
+                                    DatePicker.showDatePicker(context,
+                                        showTitleActions: true,
+                                        minTime: DateTime(2018, 1, 1),
+                                        maxTime: DateTime(2021, 12,12), onChanged: (date) {
+                                          print('change $date');
+                                        }, onConfirm: (date) {
+                                          setState(() {
+                                            end = date;
+                                            String day = "0";
+                                            String month = "0";
+                                            date.day.toString().length == 2 ? day =  date.day.toString() : day = day + date.day.toString();
+                                            date.month.toString().length == 2 ? month =  date.month.toString() : month = month + date.month.toString();
+                                            if ( _valueDateStart.isNotEmpty && start.isAfter(end)) {
+                                              String tmp = _valueDateStart.toString();
+                                              _valueDateStart = day+"/"+month+"/"+date.year.toString();
+                                              _valueDateEnd = tmp;
+
+                                            }else{
+                                              _valueDateEnd = day+"/"+month+"/"+date.year.toString();
+                                            }
+
+                                          });
+                                          print('confirm $date');
+                                        }, currentTime: DateTime.now(), locale: LocaleType.fr);
+                                  },
+                                      child: Text(
+                                          "Fin"
+                                      )),
+                                ]),
+                              Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Text(
+                                        _valueDateStart
+                                    ),
+                                    Text(
+                                        _valueDateEnd
+                                    ),
+                                  ]),
+
                               Center(
                                   child:  RaisedButton(
                                     padding: const EdgeInsets.all(8.0),
@@ -247,6 +279,7 @@ class _SearchWidget extends State<SearchWidget> {
                                     child: new Text("Appliquer filtre"),
                                   )
                               ),
+
                             ]
                         ) : Text("Hors Ligne"),
                       ),
@@ -325,7 +358,6 @@ class _SearchWidget extends State<SearchWidget> {
                               ),
                             ],
                           ),
-
                         ]
                     ),
                   ],

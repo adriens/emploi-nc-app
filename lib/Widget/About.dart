@@ -1,14 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 
 class AboutWidget extends StatefulWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Text("About"),
-    );
-  }
+
   AboutWidget({
     Key key,
     this.title,
@@ -30,23 +24,8 @@ class _AboutWidget extends State<AboutWidget> {
     super.initState();
   }
 
-  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = new GlobalKey<RefreshIndicatorState>();
-  static const String _title = 'About';
-
   @override
   Widget build(BuildContext context) {
-    final names = [
-      'Version',
-      'Ronny Soutart',
-      'Emilie Bossart',
-      'Jimmy Avae'
-    ];
-    final desc = [
-      'adriensales.png',
-      'ronnysoutart.jpg',
-      'emiliebossart.png',
-      'jimmyavae.png'
-    ];
 
     return ListView(
 

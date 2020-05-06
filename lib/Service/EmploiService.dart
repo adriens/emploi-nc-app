@@ -25,26 +25,17 @@ class EmploiService {
       return latestEmplois;
   }
 
-  static Future<List<Emploi>> getSearch(String nb,String search,String commune,String contrat,DateTime datedebut, DateTime datefin) async{
+  static Future<List<Emploi>> getSearch(String nb,String search,String commune,String contrat,String datedebut, String datefin) async{
 
-    String day_date1 = "0";
-    String day_date2 = "0";
-    String month_date1 = "0";
-    String month_date2 = "0";
-
-    datedebut.day.toString().length == 2 ? day_date1 =  datedebut.day.toString() : day_date1 = day_date1 + datedebut.day.toString();
-    datefin.day.toString().length == 2 ? day_date2 =  datefin.day.toString() : day_date2 = day_date2 + datefin.day.toString();
-    datedebut.month.toString().length == 2 ? month_date1 =  datedebut.month.toString() : month_date1 = month_date1 + datedebut.month.toString();
-    datefin.month.toString().length == 2 ? month_date2 =  datefin.month.toString() : month_date2 = month_date2 + datefin.month.toString();
-
-    String date1 = day_date1+month_date1+datedebut.year.toString();
-    String date2 = day_date2+month_date2+datefin.year.toString();
+    datedebut = datedebut.replaceAll("/", "");
+    datefin = datefin.replaceAll("/", "");
+    print(datedebut+"|"+datefin);
     if ( commune.contains("Tout")) commune = "none";
     if ( contrat.contains("Tout")) contrat = "none";
     if ( search.isEmpty || search == "" || search == null ) search = "none";
 
-    if ( datedebut.isAfter(datefin) ) { date1 = "none";date2 = "none";};
-    var response= await http.get('https://emploi-nouvelle-caledonie.p.rapidapi.com/search/'+nb+"/"+search+"/"+commune+"/"+contrat+"/"+date1+"/"+date2, headers : HEADERS );
+    if ( datedebut.isEmpty || datefin.isEmpty )  {datedebut = "none";datefin = "none";}
+    var response= await http.get('https://emploi-nouvelle-caledonie.p.rapidapi.com/search/'+nb+"/"+search+"/"+commune+"/"+contrat+"/"+datedebut+"/"+datefin, headers : HEADERS );
 
     print("Status : "+response.statusCode.toString() );
     print("URL <"+response.request.toString()+">");

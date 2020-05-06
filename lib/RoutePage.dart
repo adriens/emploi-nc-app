@@ -1,4 +1,3 @@
-import 'package:EmploiNC/Page/DefaultPage.dart';
 import 'package:EmploiNC/Page/HomePage.dart';
 import 'package:EmploiNC/Widget/PlaceHolder.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:EmploiNC/Page/AboutPage.dart';
 import 'package:EmploiNC/Page/SearchPage.dart';
 import 'package:EmploiNC/Page/StatsPage.dart';
+
+import 'Page/TestSQL.dart';
 
 
 class RoutePage extends StatefulWidget {
@@ -21,7 +22,8 @@ class _RoutePageState extends State<RoutePage> {
     //PlaceholderWidget( DefaultPage() ),
     PlaceholderWidget( SearchPage() ),
     PlaceholderWidget( StatsPage() ),
-    PlaceholderWidget( AboutPage() )
+    PlaceholderWidget( AboutPage() ),
+    PlaceholderWidget( TestSQL() ),
   ];
 
   void onTabTapped(int index) {
@@ -62,6 +64,11 @@ class _RoutePageState extends State<RoutePage> {
               icon: Icon(Icons.info),
               backgroundColor:  Colors.blue[900],
               title: Text('A Propos')
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.build),
+              backgroundColor:  Colors.blue[900],
+              title: Text('Dev')
           )
         ],
       ),
