@@ -1,3 +1,4 @@
+import 'package:EmploiNC/Variable/Variable.dart';
 import 'package:EmploiNC/Widget/AllOffers.dart';
 import 'package:EmploiNC/Widget/ListOffers.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,12 +13,12 @@ class HomePage extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: Colors.blue[900],
+        brightness: themeisDark ? themebrightnessDark: themebrightnessLight,
+        primaryColor: primaryColor,
       ),
       darkTheme: ThemeData(
-        primaryColor: Colors.blue[900],
-        brightness: Brightness.dark,
+        primaryColor: primaryColor,
+        brightness: themeisDark ? themebrightnessDark: themebrightnessLight,
       ),
       home: DefaultTabController(
         length: 2,

@@ -1,3 +1,4 @@
+import 'package:EmploiNC/Variable/Variable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,12 +8,12 @@ class DefaultPage extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: Colors.blue[900],
+        brightness: themeisDark ? themebrightnessDark: themebrightnessLight,
+        primaryColor: primaryColor,
       ),
       darkTheme: ThemeData(
-        primaryColor: Colors.blue[900],
-        brightness: Brightness.dark,
+        primaryColor: primaryColor,
+        brightness: themeisDark ? themebrightnessDark: themebrightnessLight,
       ),
       home: DefaultTabController(
         length: 2,

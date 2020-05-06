@@ -231,8 +231,6 @@ class _AllOffers extends State<AllOffers> {
             onRefresh: _loadFromApi
           );
         }
-
-
       },
     );
   }

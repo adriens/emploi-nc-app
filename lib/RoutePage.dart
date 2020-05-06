@@ -6,6 +6,7 @@ import 'package:EmploiNC/Page/AboutPage.dart';
 import 'package:EmploiNC/Page/SearchPage.dart';
 import 'package:EmploiNC/Page/StatsPage.dart';
 
+import 'Page/ParameterPage.dart';
 import 'Page/TestSQL.dart';
 
 
@@ -23,7 +24,7 @@ class _RoutePageState extends State<RoutePage> {
     PlaceholderWidget( SearchPage() ),
     PlaceholderWidget( StatsPage() ),
     PlaceholderWidget( AboutPage() ),
-    PlaceholderWidget( TestSQL() ),
+    PlaceholderWidget( ParameterPage() ),
   ];
 
   void onTabTapped(int index) {
@@ -66,9 +67,9 @@ class _RoutePageState extends State<RoutePage> {
               title: Text('A Propos')
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.build),
+              icon: Icon(Icons.settings),
               backgroundColor:  Colors.blue[900],
-              title: Text('Dev')
+              title: Text('Paramètres')
           )
         ],
       ),

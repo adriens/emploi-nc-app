@@ -1,3 +1,4 @@
+import 'package:EmploiNC/Variable/Variable.dart';
 import 'package:EmploiNC/Widget/About.dart';
 import 'package:EmploiNC/Widget/Social.dart';
 import 'package:EmploiNC/Widget/Collaborateurs.dart';
@@ -10,18 +11,18 @@ class AboutPage extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-      brightness: Brightness.dark,
-      primaryColor: Colors.blue[900],
+      brightness: themeisDark ? themebrightnessDark: themebrightnessLight,
+      primaryColor: primaryColor,
     ),
       darkTheme: ThemeData(
-        primaryColor: Colors.blue[900],
-        brightness: Brightness.dark,
+        primaryColor: primaryColor,
+        brightness: themeisDark ? themebrightnessDark: themebrightnessLight,
       ),
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor:  Colors.blue[900],
+            backgroundColor:  primaryColor,
             flexibleSpace: new Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children : [

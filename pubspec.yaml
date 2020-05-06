@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   sqflite:
+  dynamic_theme:
   http:
   qr_flutter:
   path:

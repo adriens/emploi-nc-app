@@ -1,3 +1,4 @@
+import 'package:EmploiNC/Variable/Variable.dart';
 import 'package:EmploiNC/Widget/Stats.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,15 +7,16 @@ import 'package:flutter_offline/flutter_offline.dart';
 class StatsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        primaryColor: Colors.blue[900],
-      ),
-      darkTheme: ThemeData(
-        primaryColor: Colors.blue[900],
-        brightness: Brightness.dark,
-      ),
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          brightness: themeisDark ? themebrightnessDark: themebrightnessLight,
+          primaryColor: primaryColor,
+        ),
+        darkTheme: ThemeData(
+          primaryColor: primaryColor,
+          brightness: themeisDark ? themebrightnessDark: themebrightnessLight,
+        ),
       home: DefaultTabController(
         length: 1,
         child: Scaffold(
