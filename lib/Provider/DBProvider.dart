@@ -59,7 +59,7 @@ class DBProvider {
 
   Future<List<EmploiSQLITE>> getAllEmploiSQLITE() async {
     final db = await database;
-    final res = await db.rawQuery("SELECT * FROM EmploiSQLITE");
+    final res = await db.rawQuery("SELECT * FROM EmploiSQLITE ORDER BY url DESC");
 
     List<EmploiSQLITE> list =
     res.isNotEmpty ? res.map((c) => EmploiSQLITE.fromJson(c)).toList() : [];

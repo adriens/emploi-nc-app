@@ -1,7 +1,6 @@
 import 'package:EmploiNC/Model/EmploiSQLITE.dart';
 
 import 'DBProvider.dart';
-import 'package:http/http.dart' as http;
 import 'package:EmploiNC/app_config.dart';
 import 'package:dio/dio.dart';
 

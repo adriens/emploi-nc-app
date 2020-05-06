@@ -4,6 +4,13 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'package:esys_flutter_share/esys_flutter_share.dart';
+//import 'dart:typed_data'; image share
+import 'dart:async';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+import 'dart:ui' as ui;
 
 const loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
@@ -103,105 +110,113 @@ class _TestSQLWidget extends State<TestSQLWidget> {
                   ),
                 )
                 : Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Text('Anonyme',
-                      style: TextStyle(
-                        color: Colors.grey[600],
-                      )
-                    ),
-                    Text('${snapshot.data[index].aPourvoirLe}',
-                      style: TextStyle(
-                        color: Colors.grey[600],
-                      )
-                    ),
-                  ]
-                ),
-                ListTile(
-                  leading: Image.memory(
-              decodeLogo(),
-              fit: BoxFit.contain,
-              color: const Color.fromRGBO(255, 255, 255, 0.5),
-              colorBlendMode: BlendMode.modulate
-              ),
-                  title: Text(
-                    "${snapshot.data[index].titreOffre}"
-                  ),
-                  isThreeLine: true,
-                  subtitle: Text(
-                    '${snapshot.data[index].typeContrat}'
-                    '\n${snapshot.data[index].communeEmploi}'
-                    '\nA pourvoir le: ${snapshot.data[index].aPourvoirLe}'
-                  )
-                ),
-                ExpandableNotifier(
-                  child: Column(
-                    children: <Widget>[
-                      ExpandablePanel(
-                        iconColor: Colors.white,
-                        tapHeaderToExpand: true,
-                        headerAlignment: ExpandablePanelHeaderAlignment.center,
-                        header: Padding(
-                padding: EdgeInsets.all(10),
-                child:  Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround  ,
-                children: <Widget>[
-                GestureDetector(
-                child: Row(
-                children: <Widget>[
-                Icon(Icons.favorite_border,color: Colors.grey[600],size: 16.0),
-                Text("XXX",
-                style: TextStyle(
-                color: Colors.grey[600],
-                fontSize: 8
-                )
-                ),
-                ]
-                ),
-                onTap: () {
-                final snackBar = SnackBar(content: Text("Tap"));
-
-                Scaffold.of(context).showSnackBar(snackBar);
-                },
-
-                ),
-                Row(
-                children: <Widget>[
-                Icon(Icons.visibility,color: Colors.grey[600],size: 16.0),
-                Text("XXX",
-                style: TextStyle(
-                color: Colors.grey[600],
-                fontSize: 8
-                )
-                ),
-                ]
-                ),
-                Row(
-                children: <Widget>[
-                Icon(Icons.share,color: Colors.grey[600],size: 16.0)
-                ]
-                ),
-                ]
-                ),
-                ),
-                        collapsed: Text(loremIpsum, softWrap: false, overflow: TextOverflow.ellipsis,),
-                        expanded: Text(loremIpsum, softWrap: true, overflow: TextOverflow.fade,),
-                        builder: (_, collapsed, expanded) {
-                          return Padding(
-                            padding: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
-                            child: Expandable(
-                              collapsed: collapsed,
-                              expanded: expanded,
-                            ),
-                          );
-                         },
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text('Anonyme',
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                          )
                         ),
-                      ],
+                        Text('${snapshot.data[index].aPourvoirLe}',
+                          style: TextStyle(
+                            color: Colors.grey[600],
+                          )
+                        ),
+                      ]
                     ),
-                  ),
+                    ListTile(
+                      leading: Image.memory(
+                      decodeLogo(),
+                      fit: BoxFit.contain,
+                        color: const Color.fromRGBO(255, 255, 255, 0.5),
+                        colorBlendMode: BlendMode.modulate
+                      ),
+                      title: Text(
+                        "${snapshot.data[index].titreOffre}"
+                      ),
+                      isThreeLine: true,
+                      subtitle: Text(
+                        '${snapshot.data[index].typeContrat}'
+                        '\n${snapshot.data[index].communeEmploi}'
+                        '\nA pourvoir le: ${snapshot.data[index].aPourvoirLe}'
+                      )
+                    ),
+                    ExpandableNotifier(
+                      child: Column(
+                        children: <Widget>[
+                          ExpandablePanel(
+                            iconColor: Colors.white,
+                            header: Padding(
+                              padding: EdgeInsets.all(10),
+                              child:  Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround  ,
+                                children: <Widget>[
+                                GestureDetector(
+                                  child: Row(
+                                    children: <Widget>[
+                                      Icon(Icons.favorite_border,color: Colors.grey[600],size: 16.0),
+                                      Text("XXX",
+                                        style: TextStyle(
+                                          color: Colors.grey[600],
+                                          fontSize: 8
+                                        )
+                                      ),
+                                    ]
+                                  ),
+                                  onTap: () {
+                                      final snackBar = SnackBar(content: Text("Tap"));
+
+                                      Scaffold.of(context).showSnackBar(snackBar);
+                                  },
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Icon(Icons.visibility,color: Colors.grey[600],size: 16.0),
+                                    Text("XXX",
+                                      style: TextStyle(
+                                        color: Colors.grey[600],
+                                        fontSize: 8
+                                      )
+                                    ),
+                                  ]
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    _showDialog(
+                                        snapshot.data[index].titreOffre,
+                                        snapshot.data[index].typeContrat,
+                                        snapshot.data[index].communeEmploi,
+                                        snapshot.data[index].aPourvoirLe,
+                                        snapshot.data[index].url
+                                    );
+                                  },
+                                  child:Row(
+                                    children: <Widget>[
+                                      Icon(Icons.share,color: Colors.grey[600],size: 16.0)
+                                    ]
+                                  )
+                                ),
+                              ]
+                              ),
+                            ),
+                            collapsed: Text(loremIpsum, softWrap: false, overflow: TextOverflow.ellipsis,),
+                            expanded: Text(loremIpsum, softWrap: true, overflow: TextOverflow.fade,),
+                            builder: (_, collapsed, expanded) {
+                              return Padding(
+                                padding: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
+                                child: Expandable(
+                                  collapsed: collapsed,
+                                  expanded: expanded,
+                                ),
+                              );
+                             },
+                            ),
+                          ],
+                        ),
+                      ),
                 ],
                 );
 
@@ -216,4 +231,106 @@ class _TestSQLWidget extends State<TestSQLWidget> {
     );
   }
 
+  Future<void> _shareMixed(String titreOffre,String contrat,String commune,String pourvoirle,String url) async {
+    try {
+      final String liensAppli = "https://play.google.com/store/apps/details?id=com.github.adriens.nc.emploi";
+
+//      await Share.files(
+//          'esys images',
+//          {
+//            'qrCode.png': bytes1.buffer.asUint8List(),
+//          },
+//          'image/png',text: titreOffre+"\nLiens :"+url);
+      Share.text(
+          'Offres Emploi Nouvelle-Calédonie',
+            titreOffre+
+            "\n"+contrat+
+            "\n"+commune+
+            "\n"+pourvoirle+
+            "\n\nLien de l'offre:\n"+url+
+            "\n\nApplication Mobile:\n"+liensAppli,
+          'text/plain');
+    } catch (e) {
+      print('error: $e');
+    }
+  }
+
+  void _showDialog(String titreOffre,String contrat,String commune,String pourvoirle,String url) {
+
+    final qrFutureBuilder = FutureBuilder(
+      future: _loadOverlayImage(),
+      builder: (ctx, snapshot) {
+        final size = 280.0;
+        if (!snapshot.hasData) {
+          return Container(width: size, height: size);
+        }
+        return CustomPaint(
+          size: Size.square(size),
+          painter: QrPainter(
+            data: url,
+            version: QrVersions.auto,
+            // size: 320.0,
+            embeddedImage: snapshot.data,
+            embeddedImageStyle: QrEmbeddedImageStyle(
+              size: Size.square(60),
+            ),
+          ),
+        );
+      },
+    );
+
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Qr Code de l'annonce"),
+          content: SafeArea(
+            top: true,
+            bottom: true,
+            child: Container(
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: Center(
+                      child: Container(
+                        width: 280,
+                        child: qrFutureBuilder,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40)
+                        .copyWith(bottom: 40),
+                    child: Text(url),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Partager"),
+              onPressed: () async => await _shareMixed(titreOffre,contrat,commune,pourvoirle,url),
+            ),
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Fermer"),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<ui.Image> _loadOverlayImage() async {
+    final completer = Completer<ui.Image>();
+    final byteData = await rootBundle.load('images/launchImage.png');
+    ui.decodeImageFromList(byteData.buffer.asUint8List(), completer.complete);
+    return completer.future;
+  }
 }
