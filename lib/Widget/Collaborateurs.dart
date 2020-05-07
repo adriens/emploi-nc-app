@@ -68,7 +68,6 @@ class _CollaborateursWidget extends State<CollaborateursWidget> {
       return new Swiper(
         itemBuilder: (BuildContext context,int index){
           return ListView(
-
                   children: [
                     Card(
                       child: new Container(

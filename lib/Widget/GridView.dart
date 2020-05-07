@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:EmploiNC/Model/Emploi.dart';
 import 'package:EmploiNC/Service/EmploiService.dart';
-
+import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:flutter_page_indicator/flutter_page_indicator.dart';
 class GridViewWidget extends StatefulWidget {
 
   GridViewWidget({
@@ -50,95 +51,338 @@ class _GridViewWidget extends State<GridViewWidget> {
 
   Widget buildList(AsyncSnapshot<List<Emploi>> snapshot) {
 
-    int _crossAxisCount = 2;
+    int _crossAxisCount = 1;
     var size = MediaQuery.of(context).size;
-    final double itemHeight = (size.height - kToolbarHeight - 24) / 2;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 6;
     final double itemWidth = size.width / 2;
 
-    return GridView.builder(
-
-        itemCount: snapshot.data.length,
-        gridDelegate:
-        new SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: _crossAxisCount,
-          childAspectRatio: (itemWidth / itemHeight),
-        ),
-        itemBuilder: (BuildContext context, int index) {
-          return  ListView(
-
-            padding: EdgeInsets.all(8),
-            children: <Widget>[
-              InkWell(
-                onTap: () => launch(snapshot.data[index].url),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+    return SingleChildScrollView (
+      child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0,12.0,0,5.0),
+              child: Row(
                   children: <Widget>[
-                    Container(
-
-                      child:Column(children: <Widget>[
-                        SizedBox(
-                          child: Container(
-                            width: 260,
-                            child: Text(snapshot.data[index].titreOffre,style:
-                            TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                            ), overflow: TextOverflow.ellipsis
-                            ),
-                          ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("Offres Récentes ",textAlign: TextAlign.left,style:
+                        TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
                         ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
-                          child: Container(
-                            decoration: BoxDecoration(
-                            ),
-                            child: Text(snapshot.data[index].typeContrat,textAlign: TextAlign.center,),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
-                          child: Container(
-                            width: 260,
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  new Text(snapshot.data[index].communeEmploi),
-                                ]
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
-                          child: Container(
-                            width: 260,
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  new Text(snapshot.data[index].aPourvoirLe),
-                                ]
-                            ),
-                          ),
-                        ),
-                      ]),
-                    )
-
-                  ],
-                ),
+                      ),
+                    ),
+                ]
               ),
-              SizedBox(
-                child:InkWell(
-                    onTap: () => launch(snapshot.data[index].url),
-                    child:Image.memory(
-                    snapshot.data[index].decodeLogo(),
-                    fit: BoxFit.contain,
-                    color: const Color.fromRGBO(255, 255, 255, 0.5),
-                    colorBlendMode: BlendMode.modulate
+            ),
+            SizedBox(
+              height: 260,
+              child: GridView.builder(
+                itemCount: snapshot.data.length,
+                gridDelegate:
+                  new SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,childAspectRatio: 1.4),
+                itemBuilder: (BuildContext context, int index) {
+                  return InkWell(
+                      onTap: () => launch(snapshot.data[index].url),
+                      child: Card(
+                        child:Container(
+                          child: Column(
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    Container(
+                                      height: 50,
+                                      width: 50,
+                                      child:InkWell(
+                                          onTap: () => launch(snapshot.data[index].url),
+                                          child:Image.memory(
+                                              snapshot.data[index].decodeLogo(),
+                                              fit: BoxFit.contain,
+                                              color: const Color.fromRGBO(255, 255, 255, 0.5),
+                                              colorBlendMode: BlendMode.modulate
+                                          )
+                                      )
+                                  ),
+                                  Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 5, 0, 2),
+                                      child: Container(
+                                        width: itemWidth/2,
+                                        child: Text(snapshot.data[index].titreOffre,style:
+                                        TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                        ), overflow: TextOverflow.ellipsis
+                                        ),
+                                      ),
+                                    ),
+                                  ]
+                                ),
+                                Row(
+                                  children: <Widget>[
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
+                                        child: Container(
+                                          width: itemWidth-10,
+                                          child: Text(snapshot.data[index].typeContrat,textAlign: TextAlign.center,),
+                                      ),
+                                    )
+                                  ]
+                                ),
+                                Row(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
+                                        child: Container(
+                                          width: itemWidth-10,
+                                          child: Text(snapshot.data[index].communeEmploi,textAlign: TextAlign.center,),
+                                        ),
+                                      )
+                                    ]
+                                ),
+                                Row(
+                                    children: <Widget>[
+                                      Padding(
+                                        padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
+                                        child: Container(
+                                          width: itemWidth-10,
+                                          height: 20,
+                                          child: Text(snapshot.data[index].aPourvoirLe,textAlign: TextAlign.center,),
+                                        ),
+                                      )
+                                    ]
+                                ),
+                          ]),
+                        ),
+                      )
+                    );
+          }),
+        ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0,20.0,0,5.0),
+              child: Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("Offres Likés ",textAlign: TextAlign.left,style:
+                      TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                      ),
+                    ),
+                  ]
+              ),
+            ),
+            SizedBox(
+              height: 150,
+              child: Swiper(
+                itemBuilder: (BuildContext context, int index) {
+                  return Card(
+                    child:Container(
+                      child: Column(
+                          children: <Widget>[
+                            Row(
+                                children: <Widget>[
+                                  Container(
+                                      height: 50,
+                                      width: 50,
+                                      child:InkWell(
+                                          onTap: () => launch(snapshot.data[index].url),
+                                          child:Image.memory(
+                                              snapshot.data[index].decodeLogo(),
+                                              fit: BoxFit.contain,
+                                          )
+                                      )
+                                  ),
+                                  Container(
+                                    width: size.width-60,
+                                    child: Text(snapshot.data[index].titreOffre,style:
+                                      TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                      ), overflow: TextOverflow.ellipsis
+                                    ),
+                                  ),
+                                ]
+                            ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
+                              child: Container(
+                                child: Text(snapshot.data[index].typeContrat,textAlign: TextAlign.center,),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
+                              child: Container(
+                                child: Text(snapshot.data[index].communeEmploi,textAlign: TextAlign.center,),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
+                              child: Container(
+                                child: Text(snapshot.data[index].aPourvoirLe,textAlign: TextAlign.center,),
+                              ),
+                            ),
+                          ]),
+                    ),
+                  );
+                },
+                itemCount: snapshot.data.length,
+                pagination: new SwiperPagination(),
+              )
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0,20.0,0,5.0),
+              child: Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("Offres Likés ",textAlign: TextAlign.left,style:
+                      TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                      ),
+                    ),
+                  ]
+              ),
+            ),
+            SizedBox(
+                height: 150,
+                child: Swiper(
+                  itemBuilder: (BuildContext context, int index) {
+                    return Card(
+                      child:Container(
+                        child: Column(
+                            children: <Widget>[
+                              Row(
+                                  children: <Widget>[
+                                    Container(
+                                        height: 50,
+                                        width: 50,
+                                        child:InkWell(
+                                            onTap: () => launch(snapshot.data[index].url),
+                                            child:Image.memory(
+                                              snapshot.data[index].decodeLogo(),
+                                              fit: BoxFit.contain,
+                                            )
+                                        )
+                                    ),
+                                    Container(
+                                      width: size.width-60,
+                                      child: Text(snapshot.data[index].titreOffre,style:
+                                      TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                      ), overflow: TextOverflow.ellipsis
+                                      ),
+                                    ),
+                                  ]
+                              ),
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
+                                child: Container(
+                                  child: Text(snapshot.data[index].typeContrat,textAlign: TextAlign.center,),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
+                                child: Container(
+                                  child: Text(snapshot.data[index].communeEmploi,textAlign: TextAlign.center,),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
+                                child: Container(
+                                  child: Text(snapshot.data[index].aPourvoirLe,textAlign: TextAlign.center,),
+                                ),
+                              ),
+                            ]),
+                      ),
+                    );
+                  },
+                  itemCount: snapshot.data.length,
+                  pagination: new SwiperPagination(),
                 )
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0,20.0,0,5.0),
+              child: Row(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("Offres Likés ",textAlign: TextAlign.left,style:
+                      TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                      ),
+                    ),
+                  ]
+              ),
+            ),
+            SizedBox(
+                height: 150,
+                child: Swiper(
+                  itemBuilder: (BuildContext context, int index) {
+                    return Card(
+                      child:Container(
+                        child: Column(
+                            children: <Widget>[
+                              Row(
+                                  children: <Widget>[
+                                    Container(
+                                        height: 50,
+                                        width: 50,
+                                        child:InkWell(
+                                            onTap: () => launch(snapshot.data[index].url),
+                                            child:Image.memory(
+                                              snapshot.data[index].decodeLogo(),
+                                              fit: BoxFit.contain,
+                                            )
+                                        )
+                                    ),
+                                    Container(
+                                      width: size.width-60,
+                                      child: Text(snapshot.data[index].titreOffre,style:
+                                      TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                      ), overflow: TextOverflow.ellipsis
+                                      ),
+                                    ),
+                                  ]
+                              ),
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
+                                child: Container(
+                                  child: Text(snapshot.data[index].typeContrat,textAlign: TextAlign.center,),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
+                                child: Container(
+                                  child: Text(snapshot.data[index].communeEmploi,textAlign: TextAlign.center,),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
+                                child: Container(
+                                  child: Text(snapshot.data[index].aPourvoirLe,textAlign: TextAlign.center,),
+                                ),
+                              ),
+                            ]),
+                      ),
+                    );
+                  },
+                  itemCount: snapshot.data.length,
+                  pagination: new SwiperPagination(),
                 )
-                ),
-          ],
-        );
-    });
+            ),
+        ]
+      ),
+    );
   }
 
 }
