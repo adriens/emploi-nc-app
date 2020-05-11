@@ -128,7 +128,7 @@ class _AllOffers extends State<AllOffers> {
                                     ), overflow: TextOverflow.ellipsis
                                 ),
                               ),
-                              Text('${snapshot.data[index].aPourvoirLe}',
+                              Text('${snapshot.data[index].formatDate(snapshot.data[index].datePublication)}',
                                   style: TextStyle(
                                     color: Colors.grey[600],
                                   )

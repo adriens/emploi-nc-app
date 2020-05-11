@@ -11,6 +11,7 @@ class Emploi {
   int id;
   String titreOffre;
   String logo;
+  String datePublication;
   String typeContrat;
   String aPourvoirLe;
   String communeEmploi;
@@ -22,6 +23,7 @@ class Emploi {
     this.id,
     this.titreOffre,
     this.logo,
+    this.datePublication,
     this.typeContrat,
     this.aPourvoirLe,
     this.communeEmploi,
@@ -32,6 +34,7 @@ class Emploi {
   factory Emploi.fromJson(Map<String, dynamic> json) =>
     new Emploi(
       id: json["id"],
+      datePublication: json["datePublication"],
       titreOffre: json['titreOffre'],
       typeContrat: json['typeContrat'],
       nomEntreprise: json['nomEntreprise'],
@@ -41,11 +44,21 @@ class Emploi {
       url: json['url']
     );
 
+  formatDate(String date){
+    date = date.replaceAll("-", "");
+    date = date.substring(0,8);
+    String year = date.substring(0,4);
+    String month = date.substring(4,6);
+    String day = date.substring(6,8);
+    return day+"/"+month+"/"+year;
+  }
+
   Map<String, dynamic> toJson() => {
     "id": id,
     "titreOffre": titreOffre,
     "typeContrat": typeContrat,
     "nomEntreprise":nomEntreprise,
+    "datePublication":datePublication,
     //"logo": DEFAULT_LOGO,
     "aPourvoirLe": aPourvoirLe,
     "communeEmploi": communeEmploi,

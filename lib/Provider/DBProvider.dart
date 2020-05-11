@@ -34,6 +34,7 @@ class DBProvider {
               'titreOffre TEXT,'
               'typeContrat TEXT,'
               'logo TEXT,'
+              'datePublication TEXT,'
               'nomEntreprise TEXT,'
               'aPourvoirLe TEXT,'
               'communeEmploi TEXT,'
