@@ -42,7 +42,7 @@ class _CollaborateursWidget extends State<CollaborateursWidget> {
     ];
     final desc = [
       'CEO/CIO',
-      'Conseil dev. Flutter et ergonomie',
+      'Conseil dév. Flutter et ergonomie',
       'Graphic Designer',
       'Lead Developer'
     ];

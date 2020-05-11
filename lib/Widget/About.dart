@@ -34,56 +34,32 @@ class _AboutWidget extends State<AboutWidget> {
           child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(10.0),
             ),
             Center(
               child:  Image(image: AssetImage('images/launchImage.png')),
             ),
             Container(
-              width: 200,
+              width: 180,
               child: Center(
                 heightFactor: 3,
-                child: Text('Application mobile des offres emplois en Nouvelle-Calédonie'),
+                child: Text("Application mobile des offres d'emplois en Nouvelle-Calédonie",textAlign: TextAlign.center),
               ),
             ),
             Center(
               child: Image.asset(
                 'images/qr-code-google-play-store.png',
-                height: 250,
-                width: 250,
+                height: 230,
+                width: 230,
               ),
             ),
             Divider(),
-            ListTile(
-              title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    CircleAvatar(
-                      backgroundImage: AssetImage("images/emploigouvnc.png"),
-                    ),
-                    new Text("Emploi.gouv.nc"),
-                  ]
-              ),
-            ),
 
-
-            Divider(),
             ListTile(
-              title: Row(
+              title: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    new Text("Nom"),
-                    new Text("Offres Emplois Calédonie")
-                  ]
-              ),
-            ),
-            Divider(),
-            ListTile(
-              title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    new Text("Version"),
-                    new Text("1.0.9")
+                    Text("Version 1.0.9",textAlign: TextAlign.center),
                   ]
               ),
             ),
