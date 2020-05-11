@@ -164,7 +164,7 @@ class _GridViewWidget extends State<GridViewWidget> {
                   children: <Widget>[
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text("Offres Likés ",textAlign: TextAlign.left,style:
+                      child: Text("Offres Favorites ",textAlign: TextAlign.left,style:
                       TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
@@ -177,6 +177,9 @@ class _GridViewWidget extends State<GridViewWidget> {
             SizedBox(
               height: 150,
               child: Swiper(
+                autoplay:true,
+                autoplayDelay: 5000,
+                duration: 1000,
                 itemBuilder: (BuildContext context, int index) {
                   return Card(
                     child:Container(
@@ -231,154 +234,6 @@ class _GridViewWidget extends State<GridViewWidget> {
                 itemCount: snapshot.data.length,
                 pagination: new SwiperPagination(),
               )
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0,20.0,0,5.0),
-              child: Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Offres Likés ",textAlign: TextAlign.left,style:
-                      TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                      ),
-                    ),
-                  ]
-              ),
-            ),
-            SizedBox(
-                height: 150,
-                child: Swiper(
-                  itemBuilder: (BuildContext context, int index) {
-                    return Card(
-                      child:Container(
-                        child: Column(
-                            children: <Widget>[
-                              Row(
-                                  children: <Widget>[
-                                    Container(
-                                        height: 50,
-                                        width: 50,
-                                        child:InkWell(
-                                            onTap: () => launch(snapshot.data[index].url),
-                                            child:Image.memory(
-                                              snapshot.data[index].decodeLogo(),
-                                              fit: BoxFit.contain,
-                                            )
-                                        )
-                                    ),
-                                    Container(
-                                      width: size.width-60,
-                                      child: Text(snapshot.data[index].titreOffre,style:
-                                      TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                      ), overflow: TextOverflow.ellipsis
-                                      ),
-                                    ),
-                                  ]
-                              ),
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
-                                child: Container(
-                                  child: Text(snapshot.data[index].typeContrat,textAlign: TextAlign.center,),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
-                                child: Container(
-                                  child: Text(snapshot.data[index].communeEmploi,textAlign: TextAlign.center,),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
-                                child: Container(
-                                  child: Text(snapshot.data[index].aPourvoirLe,textAlign: TextAlign.center,),
-                                ),
-                              ),
-                            ]),
-                      ),
-                    );
-                  },
-                  itemCount: snapshot.data.length,
-                  pagination: new SwiperPagination(),
-                )
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0,20.0,0,5.0),
-              child: Row(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Offres Likés ",textAlign: TextAlign.left,style:
-                      TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                      ),
-                    ),
-                  ]
-              ),
-            ),
-            SizedBox(
-                height: 150,
-                child: Swiper(
-                  itemBuilder: (BuildContext context, int index) {
-                    return Card(
-                      child:Container(
-                        child: Column(
-                            children: <Widget>[
-                              Row(
-                                  children: <Widget>[
-                                    Container(
-                                        height: 50,
-                                        width: 50,
-                                        child:InkWell(
-                                            onTap: () => launch(snapshot.data[index].url),
-                                            child:Image.memory(
-                                              snapshot.data[index].decodeLogo(),
-                                              fit: BoxFit.contain,
-                                            )
-                                        )
-                                    ),
-                                    Container(
-                                      width: size.width-60,
-                                      child: Text(snapshot.data[index].titreOffre,style:
-                                      TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                      ), overflow: TextOverflow.ellipsis
-                                      ),
-                                    ),
-                                  ]
-                              ),
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
-                                child: Container(
-                                  child: Text(snapshot.data[index].typeContrat,textAlign: TextAlign.center,),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
-                                child: Container(
-                                  child: Text(snapshot.data[index].communeEmploi,textAlign: TextAlign.center,),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
-                                child: Container(
-                                  child: Text(snapshot.data[index].aPourvoirLe,textAlign: TextAlign.center,),
-                                ),
-                              ),
-                            ]),
-                      ),
-                    );
-                  },
-                  itemCount: snapshot.data.length,
-                  pagination: new SwiperPagination(),
-                )
             ),
         ]
       ),
