@@ -111,7 +111,7 @@ class _ListOffers extends State<ListOffers> {
                                         child: Container(
                                           decoration: BoxDecoration(
                                           ),
-                                          child: Text(snapshot.data[index].typeContrat,textAlign: TextAlign.center,),
+                                          child: Text(snapshot.data[index].nomEmployeur(),textAlign: TextAlign.center,),
                                         ),
                                       ),
                                       Padding(

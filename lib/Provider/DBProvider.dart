@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:EmploiNC/Model/Emploi.dart';
 import 'package:EmploiNC/Model/EmploiSQLITE.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -32,7 +33,8 @@ class DBProvider {
               'id INTEGER PRIMARY KEY,'
               'titreOffre TEXT,'
               'typeContrat TEXT,'
-              //'logo TEXT,'
+              'logo TEXT,'
+              'nomEntreprise TEXT,'
               'aPourvoirLe TEXT,'
               'communeEmploi TEXT,'
               'url TEXT UNIQUE'
@@ -57,12 +59,16 @@ class DBProvider {
     return res;
   }
 
-  Future<List<EmploiSQLITE>> getAllEmploiSQLITE() async {
+  Future<List<Emploi>> getAllEmploiSQLITE() async {
+    print("---------------------------------------------------\n");
+    print("SELECT_ALL");
     final db = await database;
     final res = await db.rawQuery("SELECT * FROM EmploiSQLITE ORDER BY url DESC");
-
-    List<EmploiSQLITE> list =
-    res.isNotEmpty ? res.map((c) => EmploiSQLITE.fromJson(c)).toList() : [];
+    print("2"+res.toList().toString());
+    print("res.isNotEmpty :"+res.isNotEmpty.toString());
+    List<Emploi> list =
+    res.isNotEmpty ? res.map((c) => Emploi.fromJson(c)).toList() : [];
+    print("---------------------------------------------------\n");
 
     return list;
   }

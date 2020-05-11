@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'Employeur.dart';
+
 List<EmploiSQLITE> employeeFromJson(String str) =>
     List<EmploiSQLITE>.from(json.decode(str).map((x) => EmploiSQLITE.fromJson(x)));
 
@@ -9,7 +11,7 @@ String employeeToJson(List<EmploiSQLITE> data) =>
 class EmploiSQLITE {
   int id;
   String titreOffre;
-  String logo;
+  Employeur employeur;
   String typeContrat;
   String aPourvoirLe;
   String communeEmploi;
@@ -19,28 +21,32 @@ class EmploiSQLITE {
   EmploiSQLITE({
     this.id,
     this.titreOffre,
-    this.logo,
+    this.employeur,
     this.typeContrat,
     this.aPourvoirLe,
     this.communeEmploi,
     this.url
   });
 
-  factory EmploiSQLITE.fromJson(Map<String, dynamic> json) => EmploiSQLITE(
-    id: json["id"],
-    titreOffre: json['titreOffre'],
-    typeContrat: json['typeContrat'],
-    //logo: json['employeur']['logo'],
-    aPourvoirLe: json['aPourvoirLe'],
-    communeEmploi : json['communeEmploi'],
-    url: json['url']
-  );
+
+  factory EmploiSQLITE.fromJson(Map<String, dynamic> json) {
+    return EmploiSQLITE(
+      id: json["id"],
+      titreOffre: json['titreOffre'],
+      typeContrat: json['typeContrat'],
+      employeur : Employeur.fromJson(json["employeur"]),
+      aPourvoirLe: json['aPourvoirLe'],
+      communeEmploi : json['communeEmploi'],
+      url: json['url']
+    );
+  }
 
   Map<String, dynamic> toJson() => {
     "id": id,
     "titreOffre": titreOffre,
     "typeContrat": typeContrat,
-    //"logo": DEFAULT_LOGO,
+    "nomEntreprise":  employeur.nomEntreprise,
+    "logo": employeur.logo,
     "aPourvoirLe": aPourvoirLe,
     "communeEmploi": communeEmploi,
     "url": url,

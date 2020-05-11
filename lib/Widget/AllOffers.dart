@@ -46,7 +46,7 @@ class _AllOffers extends State<AllOffers> {
     return Scaffold(
       body: isLoading
           ? Center(
-            child: CircularProgressIndicator(),
+        child: CircularProgressIndicator(),
       )
           : _buildEmployeeListView(),
     );
@@ -97,138 +97,141 @@ class _AllOffers extends State<AllOffers> {
           );
         } else {
           return new RefreshIndicator(
-            child:ListView.separated(
-              separatorBuilder: (context, index) => Divider(
-                color: Colors.black12,
-              ),
-              itemCount: snapshot.data.length+1,
-              itemBuilder: (BuildContext context, int index) {
-                return (index == snapshot.data.length ) ?
-                Container(
-                  child: FlatButton(
-                    child: Text("Charger plus"),
-                    onPressed: () {
-                      // TODO: Attente de la mise à jour de l'api pour charger plus d'offres
-                    },
-                  ),
-                )
-                : InkWell(
-                  onTap: () => launch(snapshot.data[index].url),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text('Anonyme',
-                            style: TextStyle(
-                              color: Colors.grey[600],
-                            )
-                          ),
-                          Text('${snapshot.data[index].aPourvoirLe}',
-                            style: TextStyle(
-                              color: Colors.grey[600],
-                            )
-                          ),
-                        ]
-                      ),
-                      ListTile(
-                        leading: Image.memory(
-                        decodeLogo(),
-                        fit: BoxFit.contain,
-                          color: const Color.fromRGBO(255, 255, 255, 0.5),
-                          colorBlendMode: BlendMode.modulate
-                        ),
-                        title: Text(
-                          "${snapshot.data[index].titreOffre}"
-                        ),
-                        isThreeLine: true,
-                        subtitle: Text(
-                          '${snapshot.data[index].typeContrat}'
-                          '\n${snapshot.data[index].communeEmploi}'
-                          '\nA pourvoir le: ${snapshot.data[index].aPourvoirLe}'
-                        )
-                      ),
-                      ExpandableNotifier(
-                        child: Column(
-                          children: <Widget>[
-                            ExpandablePanel(
-                              iconColor: Colors.white,
-                              header: Padding(
-                                padding: EdgeInsets.all(10),
-                                child:  Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround  ,
-                                  children: <Widget>[
-                                  GestureDetector(
-                                    child: Row(
-                                      children: <Widget>[
-                                        Icon(Icons.favorite_border,color: Colors.grey[600],size: 16.0),
-                                        Text("XXX",
-                                          style: TextStyle(
-                                            color: Colors.grey[600],
-                                            fontSize: 8
-                                          )
-                                        ),
-                                      ]
-                                    ),
-                                    onTap: () {
-                                        final snackBar = SnackBar(content: Text("Tap"));
-
-                                        Scaffold.of(context).showSnackBar(snackBar);
-                                    },
-                                  ),
-                                  Row(
-                                    children: <Widget>[
-                                      Icon(Icons.visibility,color: Colors.grey[600],size: 16.0),
-                                      Text("XXX",
-                                        style: TextStyle(
-                                          color: Colors.grey[600],
-                                          fontSize: 8
-                                        )
-                                      ),
-                                    ]
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      _showDialog(
-                                          snapshot.data[index].titreOffre,
-                                          snapshot.data[index].typeContrat,
-                                          snapshot.data[index].communeEmploi,
-                                          snapshot.data[index].aPourvoirLe,
-                                          snapshot.data[index].url
-                                      );
-                                    },
-                                    child:Row(
-                                      children: <Widget>[
-                                        Icon(Icons.share,color: Colors.grey[600],size: 16.0)
-                                      ]
-                                    )
-                                  ),
-                                ]
+              child:ListView.separated(
+                separatorBuilder: (context, index) => Divider(
+                  color: Colors.black12,
+                ),
+                itemCount: snapshot.data.length+1,
+                itemBuilder: (BuildContext context, int index) {
+                  return (index == snapshot.data.length ) ?
+                  Container(
+                    child: FlatButton(
+                      child: Text("Charger plus"),
+                      onPressed: () {
+                        // TODO: Attente de la mise à jour de l'api pour charger plus d'offres
+                      },
+                    ),
+                  )
+                      : InkWell(
+                    onTap: () => launch(snapshot.data[index].url),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Container(
+                                width:260,
+                                child: Text('${snapshot.data[index].nomEntreprise}',
+                                    style: TextStyle(
+                                      color: Colors.grey[600],
+                                    ), overflow: TextOverflow.ellipsis
                                 ),
                               ),
-                              collapsed: Text(loremIpsum, softWrap: false, overflow: TextOverflow.ellipsis,),
-                              expanded: Text(loremIpsum, softWrap: true, overflow: TextOverflow.fade,),
-                              builder: (_, collapsed, expanded) {
-                                return Padding(
-                                  padding: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
-                                  child: Expandable(
-                                    collapsed: collapsed,
-                                    expanded: expanded,
+                              Text('${snapshot.data[index].aPourvoirLe}',
+                                  style: TextStyle(
+                                    color: Colors.grey[600],
+                                  )
+                              ),
+                            ]
+                        ),
+                        ListTile(
+                            leading: Image.memory(
+                                snapshot.data[index].decodeLogo(),
+                                fit: BoxFit.contain,
+                                color: const Color.fromRGBO(255, 255, 255, 0.5),
+                                colorBlendMode: BlendMode.modulate
+                            ),
+                            title: Text(
+                                "${snapshot.data[index].titreOffre}"
+                            ),
+                            isThreeLine: true,
+                            subtitle: Text(
+                                '${snapshot.data[index].typeContrat}'
+                                    '\n${snapshot.data[index].communeEmploi}'
+                                    '\nA pourvoir le: ${snapshot.data[index].aPourvoirLe}'
+                            )
+                        ),
+                        ExpandableNotifier(
+                          child: Column(
+                            children: <Widget>[
+                              ExpandablePanel(
+                                iconColor: Colors.white,
+                                header: Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child:  Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround  ,
+                                      children: <Widget>[
+                                        GestureDetector(
+                                          child: Row(
+                                              children: <Widget>[
+                                                Icon(Icons.favorite_border,color: Colors.grey[600],size: 16.0),
+                                                Text("XXX",
+                                                    style: TextStyle(
+                                                        color: Colors.grey[600],
+                                                        fontSize: 8
+                                                    )
+                                                ),
+                                              ]
+                                          ),
+                                          onTap: () {
+                                            final snackBar = SnackBar(content: Text("Tap"));
+
+                                            Scaffold.of(context).showSnackBar(snackBar);
+                                          },
+                                        ),
+                                        Row(
+                                            children: <Widget>[
+                                              Icon(Icons.visibility,color: Colors.grey[600],size: 16.0),
+                                              Text("XXX",
+                                                  style: TextStyle(
+                                                      color: Colors.grey[600],
+                                                      fontSize: 8
+                                                  )
+                                              ),
+                                            ]
+                                        ),
+                                        GestureDetector(
+                                            onTap: () {
+                                              _showDialog(
+                                                  snapshot.data[index].titreOffre,
+                                                  snapshot.data[index].typeContrat,
+                                                  snapshot.data[index].communeEmploi,
+                                                  snapshot.data[index].aPourvoirLe,
+                                                  snapshot.data[index].url
+                                              );
+                                            },
+                                            child:Row(
+                                                children: <Widget>[
+                                                  Icon(Icons.share,color: Colors.grey[600],size: 16.0)
+                                                ]
+                                            )
+                                        ),
+                                      ]
                                   ),
-                                );
-                               },
+                                ),
+                                collapsed: Text(loremIpsum, softWrap: false, overflow: TextOverflow.ellipsis,),
+                                expanded: Text(loremIpsum, softWrap: true, overflow: TextOverflow.fade,),
+                                builder: (_, collapsed, expanded) {
+                                  return Padding(
+                                    padding: EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
+                                    child: Expandable(
+                                      collapsed: collapsed,
+                                      expanded: expanded,
+                                    ),
+                                  );
+                                },
                               ),
                             ],
                           ),
                         ),
-                  ],
-                  ),
-                );
+                      ],
+                    ),
+                  );
 
-              },
-            ),
-            onRefresh: _loadFromApi
+                },
+              ),
+              onRefresh: _loadFromApi
           );
         }
       },
@@ -247,12 +250,12 @@ class _AllOffers extends State<AllOffers> {
 //          'image/png',text: titreOffre+"\nLiens :"+url);
       Share.text(
           'Offres Emploi Nouvelle-Calédonie',
-            titreOffre+
-            "\n"+contrat+
-            "\n"+commune+
-            "\n"+pourvoirle+
-            "\n\nLien de l'offre:\n"+url+
-            "\n\nApplication Mobile:\n"+liensAppli,
+          titreOffre+
+              "\n"+contrat+
+              "\n"+commune+
+              "\n"+pourvoirle+
+              "\n\nLien de l'offre:\n"+url+
+              "\n\nApplication Mobile:\n"+liensAppli,
           'text/plain');
     } catch (e) {
       print('error: $e');
