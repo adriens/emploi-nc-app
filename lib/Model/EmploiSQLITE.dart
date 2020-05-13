@@ -10,6 +10,7 @@ String employeeToJson(List<EmploiSQLITE> data) =>
 
 class EmploiSQLITE {
   int id;
+  String shortnumeroOffre;
   String titreOffre;
   Employeur employeur;
   String datePublication;
@@ -17,10 +18,13 @@ class EmploiSQLITE {
   String aPourvoirLe;
   String communeEmploi;
   String url;
+  String isFav;
 
   EmploiSQLITE({
     this.id,
+    this.isFav,
     this.titreOffre,
+    this.shortnumeroOffre,
     this.datePublication,
     this.employeur,
     this.typeContrat,
@@ -33,7 +37,9 @@ class EmploiSQLITE {
   factory EmploiSQLITE.fromJson(Map<String, dynamic> json) {
     return EmploiSQLITE(
       id: json["id"],
+      isFav : "false",
       datePublication: json["datePublication"],
+      shortnumeroOffre: json["shortnumeroOffre"],
       titreOffre: json['titreOffre'],
       typeContrat: json['typeContrat'],
       employeur : Employeur.fromJson(json["employeur"]),
@@ -45,7 +51,9 @@ class EmploiSQLITE {
 
   Map<String, dynamic> toJson() => {
     "id": id,
+    "isFav":isFav,
     "titreOffre": titreOffre,
+    "shortnumeroOffre":shortnumeroOffre,
     "typeContrat": typeContrat,
     "datePublication":datePublication,
     "nomEntreprise":  employeur.nomEntreprise,

@@ -1,4 +1,5 @@
 import 'package:EmploiNC/Model/EmploiSQLITE.dart';
+import 'package:EmploiNC/Model/Favory.dart';
 
 import 'DBProvider.dart';
 import 'package:EmploiNC/app_config.dart';
@@ -26,5 +27,16 @@ class EmploiSQLITEApiProvider {
       print('Inserting $emploi');
       DBProvider.db.createEmploi(EmploiSQLITE.fromJson(emploi));
     }).toList();
+  }
+
+
+  bool favOffer(Favory fav) {
+    try{
+      DBProvider.db.createFavory(fav);
+      print('Inserting $fav');
+      return true;
+    }catch(Error){
+      return false;
+    }
   }
 }

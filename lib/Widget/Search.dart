@@ -29,6 +29,7 @@ class _SearchWidget extends State<SearchWidget> {
 
   final TextEditingController _filter = new TextEditingController();
 
+  bool initPage = true;
   String _searchText = "";
   Icon _searchIcon = new Icon(Icons.search);
   Widget _appBarTitle = new Text( 'Rechercher');
@@ -41,6 +42,9 @@ class _SearchWidget extends State<SearchWidget> {
    overlayState.insert(overlayEntry);
    await emplois;
    overlayEntry.remove();
+   setState(() {
+     initPage = false;
+   });
 
   }
   _refreshInit() {
@@ -81,8 +85,6 @@ class _SearchWidget extends State<SearchWidget> {
   DateTime start;
   DateTime end;
   Widget build(BuildContext context) {
-
-
     return DefaultTabController(
         length: 2,
         child: Scaffold(
@@ -101,7 +103,12 @@ class _SearchWidget extends State<SearchWidget> {
                     fit: StackFit.expand,
                     children: [
                       Center(
-                        child:  connected ? _buildList(context) : Text("Hors Ligne"),
+                        child:  connected ? Column(
+                          children: <Widget>[
+                            initPage ? Text('Chargement des 20 dernières Offres') : Container(),
+                            Expanded(child:_buildList(context))
+                          ],
+                        ) : Text("Hors Ligne"),
                       ),
                     ],
                   );
@@ -194,7 +201,7 @@ class _SearchWidget extends State<SearchWidget> {
                                 ],
                               ),
                               Container(
-                                  child: Text("Intervalle de date :")
+                                  child: Text("Intervalle de date de prise de poste :")
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -398,11 +405,15 @@ class _SearchWidget extends State<SearchWidget> {
       body: FutureBuilder<List<Emploi>>(
           future: emplois,
           builder: (BuildContext context, AsyncSnapshot<List<Emploi>> snapshot) {
+            print(snapshot);
             if ( snapshot.hasData ) {
               return  ListView.builder(
                   itemCount: snapshot.data.length,
                   itemBuilder:(BuildContext context, int index) {
-                    return Card(
+                    return Column(
+                      children: <Widget>[
+                        index == 0 && !initPage && snapshot.data.length > 1 ? Text('Chargement de '+snapshot.data.length.toString()+' Offres') : snapshot.data.length == 1 ? Text("Chargement d'une offre d'emploi.") : Container(),
+                        Card(
                         elevation: 3,
                         child: InkWell(
                             onTap: () => launch(snapshot.data[index].url),
@@ -461,11 +472,15 @@ class _SearchWidget extends State<SearchWidget> {
                               ],
                             )
                         )
+                    ),
+                    ]
                     );
                   }
               );
             } else if (snapshot.hasError) {
               return Text(snapshot.error.toString());
+            }else if ( snapshot.data == null && _searchText.isNotEmpty ){
+              return Center(child: Text("Pas d'offres d'emplois correspondante"));
             }
             return ListView.builder(
                 itemCount: 10,
@@ -495,8 +510,6 @@ class _SearchWidget extends State<SearchWidget> {
   }
 
   Future<void> _searchPressed() async {
-
-
     setState(() {
       if (this._searchIcon.icon == Icons.search) {
         _refresh();

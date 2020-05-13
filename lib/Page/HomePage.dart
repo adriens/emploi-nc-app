@@ -72,7 +72,6 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text("A"),
                     new GridViewWidget(),
                   ],
                 ),
@@ -88,7 +87,7 @@ class HomePage extends StatelessWidget {
                     fit: StackFit.expand,
                     children: [
                       Center(
-                        child:  connected ? AllOffers() : Text("Hors Ligne"),
+                        child: AllOffers(),
                       ),
                     ],
                   );
