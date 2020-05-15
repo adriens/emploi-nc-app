@@ -9,7 +9,7 @@ class Employeur{
 
   factory Employeur.fromJson(Map<String, dynamic> json){
     return Employeur(
-        nomEntreprise: json['nomEntreprise'],
+        nomEntreprise: json['nomEntreprise'] == null ? "Anonyme" : json['nomEntreprise'],
         logo: json['logo']
     );
   }

@@ -7,7 +7,6 @@ import 'package:EmploiNC/Page/SearchPage.dart';
 import 'package:EmploiNC/Page/StatsPage.dart';
 
 import 'Page/ParameterPage.dart';
-import 'Page/TestSQL.dart';
 
 
 class RoutePage extends StatefulWidget {

@@ -1,3 +1,4 @@
+import 'package:EmploiNC/Variable/Variable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,6 @@ class AboutWidget extends StatefulWidget {
 }
 
 class _AboutWidget extends State<AboutWidget> {
-
 
   @override
   void initState() {
@@ -59,7 +59,7 @@ class _AboutWidget extends State<AboutWidget> {
               title: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text("Version 1.0.9",textAlign: TextAlign.center),
+                    Text(version,textAlign: TextAlign.center),
                   ]
               ),
             ),

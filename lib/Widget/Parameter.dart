@@ -21,11 +21,8 @@ class Parameter extends StatefulWidget {
 
 class _Parameter extends State<Parameter> {
 
-
-
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -63,7 +60,7 @@ class _Parameter extends State<Parameter> {
   }
 
   void changeBrightness() {
-    print("Dark");
     DynamicTheme.of(context).setBrightness(Brightness.dark);
   }
+
 }

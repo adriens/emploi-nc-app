@@ -7,7 +7,6 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'EmploiSQLITE_api_provider.dart';
 
 class DBProvider {
   static Database _database;
@@ -95,13 +94,21 @@ class DBProvider {
     return list;
   }
 
-
-  Future<List<Favory>> isFav(String numeroOffre) async {
+  Future<String> isFav(String numeroOffre) async {
     final db = await database;
-    final res = await db.rawQuery('SELECT * FROM favories ORDER BY url DESC');
-    List<Favory> list =
-    res.isNotEmpty ? res.map((c) => Favory.fromJson(c)).toList() : null;
-    return list;
+    final res = await db.rawQuery('SELECT shortnumeroOffre FROM favories WHERE shortnumeroOffre='+'"'+numeroOffre+'" LIMIT 1');
+
+    String numero = "";
+    if ( numero != null ) {
+      numero = res.toString().replaceAll("shortnumeroOffre: ", "");
+      numero = numero.replaceAll("{", "");
+      numero = numero.replaceAll("}", "");
+      numero = numero.replaceAll("[", "");
+      numero = numero.replaceAll("]", "");
+      return numero;
+    }
+
+    return "0000";
   }
 
   updateisFav(String numeroOffre,String bool) async {
@@ -110,6 +117,22 @@ class DBProvider {
       await db.rawDelete('DELETE FROM favories WHERE shortnumeroOffre='+'"'+numeroOffre+'"');
     }
     await db.rawUpdate('UPDATE EmploiSQLITE SET isFav='+'"'+bool+'" WHERE shortnumeroOffre='+'"'+numeroOffre+'"');
-    final res = await db.rawQuery('SELECT * FROM EmploiSQLITE WHERE shortnumeroOffre='+'"'+numeroOffre+'" ORDER BY url DESC');
+    await db.rawQuery('SELECT * FROM EmploiSQLITE WHERE shortnumeroOffre='+'"'+numeroOffre+'" ORDER BY url DESC');
+  }
+
+  Future<String> getLastOfferNumero() async {
+    final db = await database;
+    final res =   await db.rawQuery('SELECT shortnumeroOffre FROM EmploiSQLITE ORDER BY shortnumeroOffre DESC LIMIT 1');
+    String numero;
+    if ( numero != null ) {
+      numero = res.toString().replaceAll("shortnumeroOffre: ", "");
+      numero = numero.replaceAll("{", "");
+      numero = numero.replaceAll("}", "");
+      numero = numero.replaceAll("[", "");
+      numero = numero.replaceAll("]", "");
+      return numero;
+    }
+
+    return "";
   }
 }

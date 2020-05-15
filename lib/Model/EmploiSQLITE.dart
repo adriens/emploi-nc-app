@@ -30,7 +30,7 @@ class EmploiSQLITE {
     this.typeContrat,
     this.aPourvoirLe,
     this.communeEmploi,
-    this.url
+    this.url,
   });
 
 
@@ -42,7 +42,7 @@ class EmploiSQLITE {
       shortnumeroOffre: json["shortnumeroOffre"],
       titreOffre: json['titreOffre'],
       typeContrat: json['typeContrat'],
-      employeur : Employeur.fromJson(json["employeur"]),
+      employeur : json["employeur"] != null ? Employeur.fromJson( json["employeur"]  ) : new Employeur(),
       aPourvoirLe: json['aPourvoirLe'],
       communeEmploi : json['communeEmploi'],
       url: json['url']

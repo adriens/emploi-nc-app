@@ -1,10 +1,9 @@
 import 'package:EmploiNC/Variable/Variable.dart';
 import 'package:EmploiNC/Widget/AllOffers.dart';
-import 'package:EmploiNC/Widget/ListOffers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:EmploiNC/Widget/GridView.dart';
+import 'package:EmploiNC/Widget/Categories.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 
 class HomePage extends StatelessWidget {
@@ -32,20 +31,21 @@ class HomePage extends StatelessWidget {
                   tabs: [
                     Tab(
                       child: Row(
+                        children: <Widget>[
+                          Expanded(child: Icon(Icons.list)),
+                          Expanded(child: new Text('Toutes'))
+                        ],
+                      ),
+                    ),
+                    Tab(
+                      child: Row(
                           children: <Widget>[
                             Expanded(child: Icon(Icons.history)),
                             Expanded(child: new Text('Récentes'))
                           ],
                       ),
                     ),
-                    Tab(
-                      child: Row(
-                        children: <Widget>[
-                          Expanded(child: Icon(Icons.list)),
-                          Expanded(child: new Text('Toutes'))
-                        ],
-                      ),
-                    )
+
                   ],
                 ),
               ]
@@ -59,30 +59,6 @@ class HomePage extends StatelessWidget {
                     ConnectivityResult connectivity,
                     Widget child,
                     ) {
-                  final bool connected = connectivity != ConnectivityResult.none;
-                  return new Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      Center(
-                        child:  connected ? GridViewWidget() : Text("Hors Ligne"),
-                      ),
-                    ],
-                  );
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    new GridViewWidget(),
-                  ],
-                ),
-              ),
-              OfflineBuilder(
-                connectivityBuilder: (
-                    BuildContext context,
-                    ConnectivityResult connectivity,
-                    Widget child,
-                    ) {
-                  final bool connected = connectivity != ConnectivityResult.none;
                   return new Stack(
                     fit: StackFit.expand,
                     children: [
@@ -99,7 +75,29 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-
+              OfflineBuilder(
+                connectivityBuilder: (
+                    BuildContext context,
+                    ConnectivityResult connectivity,
+                    Widget child,
+                    ) {
+                  final bool connected = connectivity != ConnectivityResult.none;
+                  return new Stack(
+                    fit: StackFit.expand,
+                    children: [
+                      Center(
+                        child:  connected ? Categories() : Text("Hors Ligne"),
+                      ),
+                    ],
+                  );
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    new Categories(),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
@@ -107,3 +105,5 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+//RECHERCHE

@@ -51,6 +51,7 @@ class Emploi {
     );
 
   formatDate(String date){
+    if ( date == null ){ return "";}
     date = date.replaceAll("-", "");
     date = date.substring(0,8);
     String year = date.substring(0,4);

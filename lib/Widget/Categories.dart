@@ -7,10 +7,10 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:EmploiNC/Model/Emploi.dart';
 import 'package:EmploiNC/Service/EmploiService.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:flutter_page_indicator/flutter_page_indicator.dart';
-class GridViewWidget extends StatefulWidget {
 
-  GridViewWidget({
+class Categories extends StatefulWidget {
+
+  Categories({
     Key key,
     this.title,
   }): super(key : key);
@@ -18,19 +18,17 @@ class GridViewWidget extends StatefulWidget {
   final String title;
 
   @override
-  _GridViewWidget createState() => _GridViewWidget();
+  _Categories createState() => _Categories();
 
 }
 
-class _GridViewWidget extends State<GridViewWidget> {
-
-// List of Items
+class _Categories extends State<Categories> {
+  
   Future<List<Emploi>> emplois;
   Future<List<Emploi>> favemplois;
 
   _refresh() {
     emplois = EmploiService.getLatestEmplois("4");
-    var apiProvider = EmploiSQLITEApiProvider();
   }
 
   @override
@@ -55,10 +53,8 @@ class _GridViewWidget extends State<GridViewWidget> {
   }
 
   Widget buildList(AsyncSnapshot<List<Emploi>> snapshot) {
-
-    int _crossAxisCount = 1;
+    
     var size = MediaQuery.of(context).size;
-    final double itemHeight = (size.height - kToolbarHeight - 24) / 6;
     final double itemWidth = size.width / 2;
 
     return SingleChildScrollView (
@@ -163,8 +159,6 @@ class _GridViewWidget extends State<GridViewWidget> {
                     );
           }),
         ),
-
-
             FutureBuilder(
               future: DBProvider.db.getAllFavEmploiSQLITE(),
               builder: (context, AsyncSnapshot<List<Emploi>> snapshot) {
@@ -292,86 +286,66 @@ class _GridViewWidget extends State<GridViewWidget> {
                         SizedBox(
                           height: 150,
                           child: Swiper(
-                      autoplay:true,
-                      autoplayDelay: 5000,
-                      duration: 1000,
-                      itemBuilder: (BuildContext context, int index) {
-                          return Card(
-                            child:Container(
-                              child: Column(
-                                  children: <Widget>[
-                                    Row(
+                            autoplay:true,
+                            autoplayDelay: 5000,
+                            duration: 1000,
+                            itemBuilder: (BuildContext context, int index) {
+                                return Card(
+                                  child:InkWell(
+                                    onTap: () => launch(snapshot.data[index].url),
+                                    child: Column(
                                         children: <Widget>[
-                                          Container(
-                                              height: 50,
-                                              width: 50,
-                                              child:InkWell(
-                                                  onTap: () => launch(snapshot.data[index].url),
-                                                  child:Image.memory(
-                                                    snapshot.data[index].decodeLogo(),
-                                                    fit: BoxFit.contain,
-                                                  )
-                                              )
-                                          ),
-                                          Container(
-                                            width: size.width-60,
-                                            child: Text(snapshot.data[index].titreOffre,style:
-                                            TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 15,
-                                            ), overflow: TextOverflow.ellipsis
-                                            ),
-                                          ),
-                                        ]
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
-                                      child: Container(
-                                        child: Text(snapshot.data[index].typeContrat,textAlign: TextAlign.center,),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
-                                      child: Container(
-                                        child: Text(snapshot.data[index].communeEmploi,textAlign: TextAlign.center,),
-                                      ),
-                                    ),
-                                    Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          new IconButton(
-                                            icon: new Icon(
-                                                snapshot.data[index].isFav.toString() == "true" ? Icons.star : Icons.star_border,
-                                                color: snapshot.data[index].isFav.toString() == "true"  ? Colors.yellow[200] : Colors.yellow[200],
-                                                size: 16.0),
-                                            onPressed: () async {
-                                              _favOffer(snapshot.data[index].shortnumeroOffre);
-
-                                              if (snapshot.data[index].isFav == "true" ){
-                                                await DBProvider.db.updateisFav(snapshot.data[index].shortnumeroOffre,"false");
-                                                setState(() {
-                                                  snapshot.data[index].isFav = "false";
-                                                });
-                                              } else {
-                                                await DBProvider.db.updateisFav(snapshot.data[index].shortnumeroOffre,"true");
-                                                setState(() {
-                                                  snapshot.data[index].isFav = "true";
-                                                });
-                                              }
-                                            },
+                                          Row(
+                                              children: <Widget>[
+                                                Container(
+                                                    height: 50,
+                                                    width: 50,
+                                                    child:InkWell(
+                                                        onTap: () => launch(snapshot.data[index].url),
+                                                        child:Image.memory(
+                                                          snapshot.data[index].decodeLogo(),
+                                                          fit: BoxFit.contain,
+                                                        )
+                                                    )
+                                                ),
+                                                Container(
+                                                  width: size.width-60,
+                                                  child: Text(snapshot.data[index].titreOffre,style:
+                                                  TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 15,
+                                                  ), overflow: TextOverflow.ellipsis
+                                                  ),
+                                                ),
+                                              ]
                                           ),
                                           Padding(
-                                            padding: EdgeInsets.fromLTRB(220, 3, 0, 3),
+                                            padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
                                             child: Container(
-                                              child: Text(snapshot.data[index].aPourvoirLe,textAlign: TextAlign.center,),
+                                              child: Text(snapshot.data[index].typeContrat,textAlign: TextAlign.center,),
                                             ),
                                           ),
+                                          Padding(
+                                            padding: EdgeInsets.fromLTRB(0, 3, 0, 3),
+                                            child: Container(
+                                              child: Text(snapshot.data[index].communeEmploi,textAlign: TextAlign.center,),
+                                            ),
+                                          ),
+                                          Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsets.fromLTRB(220, 3, 0, 3),
+                                                  child: Container(
+                                                    child: Text(snapshot.data[index].aPourvoirLe,textAlign: TextAlign.center,),
+                                                  ),
+                                                ),
 
-                                        ]
-                                    )
-                                  ]),
-                            ),
-                          );
+                                              ]
+                                          )
+                                        ]),
+                                  ),
+                                );
                       },
                       itemCount: snapshot.data.length,
                       pagination: new SwiperPagination(),
@@ -405,7 +379,9 @@ class _GridViewWidget extends State<GridViewWidget> {
         ]
       ),
     );
+    
   }
+  
   Future<Null> _favOffer(String numero) async {
     Favory fav = new Favory();
     fav.shortnumeroOffre = numero;
@@ -414,5 +390,6 @@ class _GridViewWidget extends State<GridViewWidget> {
 
     return null;
   }
+  
 }
 

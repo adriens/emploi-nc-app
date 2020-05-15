@@ -1,4 +1,7 @@
 import 'package:EmploiNC/Model/Emploi.dart';
+import 'package:EmploiNC/Model/Favory.dart';
+import 'package:EmploiNC/Provider/DBProvider.dart';
+import 'package:EmploiNC/Provider/EmploiSQLITE_api_provider.dart';
 import 'package:EmploiNC/Service/EmploiService.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +37,31 @@ class _SearchWidget extends State<SearchWidget> {
   Icon _searchIcon = new Icon(Icons.search);
   Widget _appBarTitle = new Text( 'Rechercher');
 
+  Future<Null> _favOffer(String numero,AsyncSnapshot<List<Emploi>> snap,int index) async {
+
+    String lastnumero = await DBProvider.db.isFav(numero);
+    print("numero :"+numero+"lastnumero :"+lastnumero);
+    if ( numero == lastnumero && snap.data[index].isFav == "true" ){
+      await DBProvider.db.updateisFav(snap.data[index].shortnumeroOffre,"false");
+      setState(() {
+        snap.data[index].isFav = "false";
+      });
+    } else {
+      await DBProvider.db.updateisFav(snap.data[index].shortnumeroOffre,"false");
+      await DBProvider.db.updateisFav(snap.data[index].shortnumeroOffre,"true");
+      setState(() {
+        snap.data[index].isFav = "true";
+      });
+    }
+
+    Favory fav = new Favory();
+    fav.shortnumeroOffre = numero;
+    var apiProvider = EmploiSQLITEApiProvider();
+    await apiProvider.favOffer(fav);
+
+    return null;
+  }
+
   _refresh()  async {
    emplois = EmploiService.getSearch("20",_searchText,_selectedCommunes,_selectedContrat,_valueDateStart,_valueDateEnd);
 
@@ -42,14 +70,17 @@ class _SearchWidget extends State<SearchWidget> {
    overlayState.insert(overlayEntry);
    await emplois;
    overlayEntry.remove();
+
    setState(() {
      initPage = false;
    });
 
   }
+
   _refreshInit() {
     emplois = EmploiService.getSearch("20",_searchText,_selectedCommunes,_selectedContrat,_valueDateStart,_valueDateEnd);
   }
+
   @override
   void initState() {
     super.initState();
@@ -70,7 +101,6 @@ class _SearchWidget extends State<SearchWidget> {
     });
   }
 
-
   bool loading = false;
   List<String> _contrats = ['Tout','CDD', 'CDI','CDD évolutif'];
   String _selectedContrat ='Tout';
@@ -84,6 +114,7 @@ class _SearchWidget extends State<SearchWidget> {
   String _valueDateEnd = '';
   DateTime start;
   DateTime end;
+
   Widget build(BuildContext context) {
     return DefaultTabController(
         length: 2,
@@ -212,7 +243,6 @@ class _SearchWidget extends State<SearchWidget> {
                                         showTitleActions: true,
                                         minTime: DateTime(2018, 1, 1),
                                         maxTime: DateTime(2021, 12,12), onChanged: (date) {
-                                          print('change $date');
                                         }, onConfirm: (date) {
                                           setState(() {
                                             start = date;
@@ -230,7 +260,6 @@ class _SearchWidget extends State<SearchWidget> {
                                             }
 
                                           });
-                                          print('confirm $date');
                                         }, currentTime: DateTime.now(), locale: LocaleType.fr);
                                   },
                                       child: Text(
@@ -241,7 +270,6 @@ class _SearchWidget extends State<SearchWidget> {
                                         showTitleActions: true,
                                         minTime: DateTime(2018, 1, 1),
                                         maxTime: DateTime(2021, 12,12), onChanged: (date) {
-                                          print('change $date');
                                         }, onConfirm: (date) {
                                           setState(() {
                                             end = date;
@@ -259,7 +287,6 @@ class _SearchWidget extends State<SearchWidget> {
                                             }
 
                                           });
-                                          print('confirm $date');
                                         }, currentTime: DateTime.now(), locale: LocaleType.fr);
                                   },
                                       child: Text(
@@ -405,7 +432,6 @@ class _SearchWidget extends State<SearchWidget> {
       body: FutureBuilder<List<Emploi>>(
           future: emplois,
           builder: (BuildContext context, AsyncSnapshot<List<Emploi>> snapshot) {
-            print(snapshot);
             if ( snapshot.hasData ) {
               return  ListView.builder(
                   itemCount: snapshot.data.length,
@@ -420,13 +446,13 @@ class _SearchWidget extends State<SearchWidget> {
                             child: Row(
                               children: <Widget>[
                                 Container(
-                                  height: 100.0,
+                                  height: 105.0,
                                   width: 80.0,
                                   padding: EdgeInsets.fromLTRB(10, 2, 0, 0),
                                   child: new Image.memory(  snapshot.data[index].decodeLogo(),fit: BoxFit.contain  ),
                                 ),
                                 Container(
-                                  height: 100,
+                                  height: 105,
                                   child: Padding(
                                     padding: EdgeInsets.fromLTRB(10, 2, 0, 0),
                                     child: Column(
@@ -459,6 +485,15 @@ class _SearchWidget extends State<SearchWidget> {
                                             child: Row(
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: <Widget>[
+                                                  new IconButton(
+                                                    icon: new Icon(
+                                                        snapshot.data[index].isFav == "true" ? Icons.star : Icons.star_border,
+                                                        color: snapshot.data[index].isFav == "true" ? Colors.yellow[200] : Colors.yellow[200],
+                                                        size: 16.0),
+                                                    onPressed: () async {
+                                                      _favOffer(snapshot.data[index].shortnumeroOffre,snapshot,index);
+                                                    },
+                                                  ),
                                                   new Text(snapshot.data[index].communeEmploi),
                                                   new Text(snapshot.data[index].aPourvoirLe)
                                                 ]
@@ -491,7 +526,7 @@ class _SearchWidget extends State<SearchWidget> {
                         child: Row(
                           children: <Widget>[
                             Container(
-                              height: 100.0,
+                              height: 105,
                             ),
                           ],
                         ),
