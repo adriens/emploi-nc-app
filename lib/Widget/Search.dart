@@ -9,6 +9,12 @@ import 'package:flutter_offline/flutter_offline.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:shimmer/shimmer.dart';
+import 'dart:async';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+import 'dart:ui' as ui;
+import 'package:esys_flutter_share/esys_flutter_share.dart';
 
 class SearchWidget extends StatefulWidget {
 
@@ -494,6 +500,29 @@ class _SearchWidget extends State<SearchWidget> {
                                                       _favOffer(snapshot.data[index].shortnumeroOffre,snapshot,index);
                                                     },
                                                   ),
+                                                  GestureDetector(
+                                                      onTap: () {
+                                                        _showShareDialog(
+                                                            snapshot.data[index]
+                                                                .titreOffre,
+                                                            snapshot.data[index]
+                                                                .typeContrat,
+                                                            snapshot.data[index]
+                                                                .communeEmploi,
+                                                            snapshot.data[index]
+                                                                .aPourvoirLe,
+                                                            snapshot.data[index].url
+                                                        );
+                                                      },
+                                                      child: Row(
+                                                          children: <Widget>[
+                                                            Icon(Icons.share,
+                                                                color: Colors
+                                                                    .grey[600],
+                                                                size: 16.0)
+                                                          ]
+                                                      )
+                                                  ),
                                                   new Text(snapshot.data[index].communeEmploi),
                                                   new Text(snapshot.data[index].aPourvoirLe)
                                                 ]
@@ -537,6 +566,111 @@ class _SearchWidget extends State<SearchWidget> {
                 ));
           }
       ),
+    );
+  }
+
+  Future<ui.Image> _loadOverlayImage() async {
+    final completer = Completer<ui.Image>();
+    final byteData = await rootBundle.load('images/launchImage.png');
+    ui.decodeImageFromList(byteData.buffer.asUint8List(), completer.complete);
+    return completer.future;
+  }
+
+  Future<void> _shareMixed(String titreOffre,String contrat,String commune,String pourvoirle,String url) async {
+
+    try {
+      final String liensAppli = "https://play.google.com/store/apps/details?id=com.github.adriens.nc.emploi";
+      Share.text(
+          'Offres Emploi Nouvelle-Calédonie',
+          titreOffre+
+              "\n"+contrat+
+              "\n"+commune+
+              "\n"+pourvoirle+
+              "\n\nLien de l'offre:\n"+url+
+              "\n\nApplication Mobile:\n"+liensAppli,
+          'text/plain');
+    } catch (e) {
+      print('error: $e');
+    }
+
+  }
+
+  void _showShareDialog(String titreOffre,String contrat,String commune,String pourvoirle,String url) {
+
+    final qrFutureBuilder = FutureBuilder(
+      future: _loadOverlayImage(),
+      builder: (ctx, snapshot) {
+        final size = 280.0;
+        if (!snapshot.hasData) {
+          return Container(width: size, height: size);
+        }
+        return CustomPaint(
+          size: Size.square(size),
+          painter: QrPainter(
+            data: url,
+            version: QrVersions.auto,
+            // size: 320.0,
+            embeddedImage: snapshot.data,
+            embeddedImageStyle: QrEmbeddedImageStyle(
+              size: Size.square(60),
+            ),
+          ),
+        );
+      },
+    );
+
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Qr Code de l'annonce"),
+          content: SafeArea(
+            top: true,
+            bottom: true,
+            child: Container(
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: Center(
+                      child: Container(
+                        width: 280,
+                        child: qrFutureBuilder,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40)
+                          .copyWith(bottom: 40),
+                      child: InkWell(
+                          child: Text(url, style: TextStyle(decoration: TextDecoration.underline, color: Colors.blue)),
+                          onTap: () async {
+                            if (await canLaunch(url)) {
+                              await launch(url);
+                            }
+                          }
+                      )
+                  ),
+                ],
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            new FlatButton(
+              child: new Text("Partager",style: TextStyle(color: Colors.black)),
+              onPressed: () async => await _shareMixed(titreOffre,contrat,commune,pourvoirle,url),
+            ),
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Fermer",style: TextStyle(color: Colors.red)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
