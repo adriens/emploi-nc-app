@@ -1,9 +1,8 @@
-import 'package:EmploiNC/Variable/Variable.dart';
-import 'package:EmploiNC/Widget/AllOffers.dart';
+import 'package:EmploiNC/src/Variable/Variable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class TestSQL extends StatelessWidget {
+class DefaultPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -17,7 +16,7 @@ class TestSQL extends StatelessWidget {
         brightness: themeisDark ? themebrightnessDark: themebrightnessLight,
       ),
       home: DefaultTabController(
-        length: 1,
+        length: 2,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor:  Colors.blue[900],
@@ -29,8 +28,15 @@ class TestSQL extends StatelessWidget {
                       Tab(
                         child: Row(
                           children: <Widget>[
-                            Expanded(child: Icon(Icons.build)),
-                            Expanded(child: Text("Test"))
+                            Expanded(child: new Text('1'))
+
+                          ],
+                        ),
+                      ),
+                      Tab(
+                        child: Row(
+                          children: <Widget>[
+                            Expanded(child: new Text('2'))
                           ],
                         ),
                       )
@@ -41,7 +47,8 @@ class TestSQL extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              AllOffers(),
+              Text('1'),
+              Text('2')
             ],
           ),
         ),

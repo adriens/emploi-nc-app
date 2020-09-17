@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:EmploiNC/Model/Emploi.dart';
-import 'package:EmploiNC/Service/EmploiService.dart';
+import 'package:EmploiNC/src/Model/Emploi.dart';
+import 'package:EmploiNC/src/Service/EmploiService.dart';
+import 'package:EmploiNC/src/Blocs/EmploisBloc.dart';
 
 class ListOffers extends StatefulWidget {
 
@@ -24,7 +25,7 @@ class _ListOffers extends State<ListOffers> {
   Future<List<Emploi>> emplois;
 
   _refresh()   {
-    emplois = EmploiService.getLatestEmplois("25");
+    emplois = bloc.getLatestEmplois("25");
   }
 
   @override

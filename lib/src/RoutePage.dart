@@ -1,12 +1,11 @@
-import 'package:EmploiNC/Page/HomePage.dart';
-import 'package:EmploiNC/Widget/PlaceHolder.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:EmploiNC/Page/AboutPage.dart';
-import 'package:EmploiNC/Page/SearchPage.dart';
-import 'package:EmploiNC/Page/StatsPage.dart';
-
+import 'Page/AboutPage.dart';
+import 'Page/HomePage.dart';
 import 'Page/ParameterPage.dart';
+import 'Page/SearchPage.dart';
+import 'Page/StatsPage.dart';
+import 'Widget/PlaceHolder.dart';
 
 
 class RoutePage extends StatefulWidget {

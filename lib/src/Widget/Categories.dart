@@ -1,12 +1,13 @@
-import 'package:EmploiNC/Model/Favory.dart';
-import 'package:EmploiNC/Provider/DBProvider.dart';
-import 'package:EmploiNC/Provider/EmploiSQLITE_api_provider.dart';
+import 'package:EmploiNC/src/Model/Favory.dart';
+import 'package:EmploiNC/src/Provider/DBProvider.dart';
+import 'package:EmploiNC/src/Provider/EmploiSQLITE_api_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:EmploiNC/Model/Emploi.dart';
-import 'package:EmploiNC/Service/EmploiService.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+
+import 'package:EmploiNC/src/Model/Emploi.dart';
+import 'package:EmploiNC/src/Blocs/EmploisBloc.dart';
 
 class Categories extends StatefulWidget {
 
@@ -28,7 +29,7 @@ class _Categories extends State<Categories> {
   Future<List<Emploi>> favemplois;
 
   _refresh() {
-    emplois = EmploiService.getLatestEmplois("4");
+    emplois = bloc.getLatestEmplois("4");
   }
 
   @override

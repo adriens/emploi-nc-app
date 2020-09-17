@@ -1,8 +1,8 @@
-import 'package:EmploiNC/Model/EmploiSQLITE.dart';
-import 'package:EmploiNC/Model/Favory.dart';
+import 'package:EmploiNC/src/Model/EmploiSQLITE.dart';
+import 'package:EmploiNC/src/Model/Favory.dart';
 
 import 'DBProvider.dart';
-import 'package:EmploiNC/app_config.dart';
+import 'package:EmploiNC/src/app_config.dart';
 import 'package:dio/dio.dart';
 
 const Map<String, String> HEADERS = {

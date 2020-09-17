@@ -1,5 +1,5 @@
-import 'package:EmploiNC/Variable/Variable.dart';
-import 'package:EmploiNC/Widget/Stats.dart';
+import 'package:EmploiNC/src/Variable/Variable.dart';
+import 'package:EmploiNC/src/Widget/Stats.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';

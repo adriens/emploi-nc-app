@@ -1,7 +1,7 @@
-import 'package:EmploiNC/Variable/Variable.dart';
-import 'package:EmploiNC/Widget/About.dart';
-import 'package:EmploiNC/Widget/Social.dart';
-import 'package:EmploiNC/Widget/Collaborateurs.dart';
+import 'package:EmploiNC/src/Variable/Variable.dart';
+import 'package:EmploiNC/src/Widget/About.dart';
+import 'package:EmploiNC/src/Widget/Social.dart';
+import 'package:EmploiNC/src/Widget/Collaborateurs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

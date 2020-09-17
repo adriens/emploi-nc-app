@@ -1,9 +1,9 @@
-import 'package:EmploiNC/Variable/Variable.dart';
-import 'package:EmploiNC/Widget/AllOffers.dart';
+import 'package:EmploiNC/src/Variable/Variable.dart';
+import 'package:EmploiNC/src/Widget/AllOffers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:EmploiNC/Widget/Categories.dart';
+import 'package:EmploiNC/src/Widget/Categories.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 
 class HomePage extends StatelessWidget {

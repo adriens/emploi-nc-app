@@ -1,9 +1,9 @@
-import 'package:EmploiNC/Model/Stats.dart';
+import 'package:EmploiNC/src/Model/Stats.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
 
-import 'package:EmploiNC/Service/StatsService.dart';
+import 'package:EmploiNC/src/Service/StatsService.dart';
 
 class StatsWidget extends StatefulWidget {
 

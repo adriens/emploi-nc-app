@@ -1,8 +1,8 @@
-import 'package:EmploiNC/Model/Emploi.dart';
-import 'package:EmploiNC/Model/Favory.dart';
-import 'package:EmploiNC/Provider/DBProvider.dart';
-import 'package:EmploiNC/Provider/EmploiSQLITE_api_provider.dart';
-import 'package:EmploiNC/Variable/Variable.dart';
+import 'package:EmploiNC/src/Model/Emploi.dart';
+import 'package:EmploiNC/src/Model/Favory.dart';
+import 'package:EmploiNC/src/Provider/DBProvider.dart';
+import 'package:EmploiNC/src/Provider/EmploiSQLITE_api_provider.dart';
+import 'package:EmploiNC/src/Variable/Variable.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

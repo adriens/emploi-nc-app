@@ -1,6 +1,7 @@
-import 'package:EmploiNC/Variable/Variable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../Variable/Variable.dart';
 
 class AboutWidget extends StatefulWidget {
 

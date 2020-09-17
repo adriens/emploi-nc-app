@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import 'package:EmploiNC/Model/Emploi.dart';
-import 'package:EmploiNC/app_config.dart';
+import 'package:EmploiNC/src/Model/Emploi.dart';
+import 'package:EmploiNC/src/app_config.dart';
 
 const Map<String, String> HEADERS = {
   'x-rapidapi-key': apiKey,
@@ -12,7 +12,7 @@ const Map<String, String> HEADERS = {
 
 class EmploiService {
 
-  static Future<List<Emploi>> getLatestEmplois(String nb) async{
+  Future<List<Emploi>> getLatestEmplois(String nb) async{
       var response = await http.get(
           'https://emploi-nouvelle-caledonie.p.rapidapi.com/emploi/latest/' + nb,
           headers: HEADERS);
@@ -27,7 +27,7 @@ class EmploiService {
 
   }
 
-  static Future<List<Emploi>> getSearch(String nb,String search,String commune,String contrat,String datedebut, String datefin) async{
+  Future<List<Emploi>> getSearch(String nb,String search,String commune,String contrat,String datedebut, String datefin) async{
 
     try{
       datedebut = datedebut.replaceAll("/", "");

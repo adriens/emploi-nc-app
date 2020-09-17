@@ -1,8 +1,9 @@
-import 'package:EmploiNC/Model/Emploi.dart';
-import 'package:EmploiNC/Model/Favory.dart';
-import 'package:EmploiNC/Provider/DBProvider.dart';
-import 'package:EmploiNC/Provider/EmploiSQLITE_api_provider.dart';
-import 'package:EmploiNC/Service/EmploiService.dart';
+/*
+import 'package:EmploiNC/src/Model/Emploi.dart';
+import 'package:EmploiNC/src/Model/Favory.dart';
+import 'package:EmploiNC/src/Provider/DBProvider.dart';
+import 'package:EmploiNC/src/Provider/EmploiSQLITE_api_provider.dart';
+import 'package:EmploiNC/src/Service/EmploiService.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_offline/flutter_offline.dart';
@@ -15,7 +16,7 @@ import 'package:flutter/services.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'dart:ui' as ui;
 import 'package:esys_flutter_share/esys_flutter_share.dart';
-
+import 'package:EmploiNC/src/Blocs/EmploisBloc.dart';
 class SearchWidget extends StatefulWidget {
 
   SearchWidget({
@@ -700,3 +701,4 @@ class _SearchWidget extends State<SearchWidget> {
   }
 
 }
+*/

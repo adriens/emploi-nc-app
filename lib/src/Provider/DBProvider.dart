@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:EmploiNC/Model/Emploi.dart';
-import 'package:EmploiNC/Model/EmploiSQLITE.dart';
-import 'package:EmploiNC/Model/Favory.dart';
+import 'package:EmploiNC/src/Model/Emploi.dart';
+import 'package:EmploiNC/src/Model/EmploiSQLITE.dart';
+import 'package:EmploiNC/src/Model/Favory.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';

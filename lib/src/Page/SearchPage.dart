@@ -1,7 +1,9 @@
-import 'package:EmploiNC/Variable/Variable.dart';
-import 'package:EmploiNC/Widget/Search.dart';
+import 'package:EmploiNC/src/Variable/Variable.dart';
+import 'package:EmploiNC/src/Widget/Search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../Widget/About.dart';
 
 class SearchPage extends StatelessWidget {
   @override
@@ -16,7 +18,7 @@ class SearchPage extends StatelessWidget {
         primaryColor: primaryColor,
         brightness: themeisDark ? themebrightnessDark: themebrightnessLight,
       ),
-      home: SearchWidget(),
+      home: AboutWidget(),
     );
   }
 }
